@@ -53,8 +53,8 @@
 .contact-button-link.cb-hidden {
   left: -50px;
 }
-.contact-button-link.facebook {
-  background: #3b5998;
+.contact-button-link.facebook-f {
+  background: #3b5998 !important;
 }
 .contact-button-link.linkedin {
   background: #0077b5;

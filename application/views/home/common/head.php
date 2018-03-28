@@ -76,4 +76,5 @@
     .practo-appt-button img{display:none;}
     .practo-widget{background:none !important;box-shadow: 0px 0 0px #aeaeae !important; height:auto; padding:0px; margin:0px;height: 30px; width: 180px; background:#5cb85c; border:1px solid #fff;}
     .practo-footer{display:none !important;}
+    .goog-te-gadget-simple {background-color: #fff;border:none;font-size: 10px;display: inline-block;padding-top: 0px;padding-bottom: 0px;cursor: pointer;zoom: 1;}
 </style>

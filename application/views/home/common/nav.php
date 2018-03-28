@@ -53,11 +53,12 @@
                             <li><a href="<?= config_item('root_dir'); ?>treatments">Treatments</a> </li>
                             <li><a href="<?= config_item('root_dir'); ?>patientcare">Patient Care</a> </li>
                             <li><a href="<?= config_item('root_dir'); ?>gallery">Gallery</a> </li>
-                            <li><a href="<?= config_item('root_dir'); ?>blog">Blog</a> </li>
-                            <li ><a style="background: #5cb85c !important;border: 1px solid #2ee72e;color: #fff;padding: 17px;margin: 26px 0 4px 0;" class="line-nun" href="<?= config_item('root_dir'); ?>booknow">Book Appointment</a></li>
+                            <li><a style="border-right:none;" href="<?= config_item('root_dir'); ?>blog">Blog</a> </li>
+                            <li><a style="background: #5cb85c !important;border: 1px solid #2ee72e;color: #fff;padding: 17px;margin: 26px 0 4px 0;" class="line-nun" href="<?= config_item('root_dir'); ?>booknow">Book Appointment</a></li>
                         </ul>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
