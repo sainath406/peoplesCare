@@ -327,11 +327,9 @@ blockquote small{
     float: left;
     margin-left: -20px;
 }
-.list-2 li:before{
-    content: "\f00c"; /* Check */
-    font-family: 'FontAwesome';
-    float: left;
-    margin-left: -20px;
+.list-2 li .fa-check{
+    color: #32c8de;
+    margin-right: 10px;
 }
 .list-3 li:before{
     content: "\f046"; /* Check-Square-o */
@@ -2636,10 +2634,17 @@ ul.nav li.dropdown a {
 .header-2 {
     padding: 0px 0px;
     background:#fff;
+    border-bottom: 1px solid #add5e7;
 }
 .header-2 .logo {
     margin: 0px 0px 0px 0px;
 }
+
+.header-2 .logo img {
+    width: 37%;
+    padding: 10px 0px;
+}
+
 .header-2 .logo h1 {
     font-weight: 600;
 }

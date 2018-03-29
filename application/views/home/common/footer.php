@@ -176,10 +176,8 @@
                     </div>
                 </form>
                 <!-- End | Register Form -->
-
             </div>
             <!-- End # DIV Form -->
-
         </div>
     </div>
 </div>
