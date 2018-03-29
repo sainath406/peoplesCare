@@ -1,10 +1,10 @@
-@import url('http://fonts.googleapis.com/css?family=Open+Sans:300,400italic,400,600');
+@import url('http://fonts.googleapis.com/css?family=Open+Sans:300,400italic,400,600|Montserrat|Work+Sans');
 body {
     color: #666666;
     font-size: 13px;
     line-height: 28px;
     background: #fff;
-    font-family: "Open Sans", arial, sans-serif;
+    font-family: "work sans", arial, sans-serif;
     -webkit-font-smoothing: antialiased;
 }
 h1,
@@ -14,7 +14,7 @@ h4,
 h5,
 h6 {
     color: #666;
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'Montserrat', sans-serif;
     font-weight: 600;
     margin: 2px 0px;
     padding: 0px;
@@ -234,7 +234,7 @@ dl dd{
 }
 /* Tooltip */
 .tooltip .tooltip-inner{
-    font-family:"Open Sans", sans-serif;	
+    font-family:"Montserrat", sans-serif;	
 }
 /* Popover */
 .popover{
@@ -257,7 +257,7 @@ dl dd{
     line-height:28px;
     padding:0px;
     padding-top:5px;
-    font-family:"Open Sans", sans-serif;
+    font-family:"Montserrat", sans-serif;
 }
 /* Blockquote */
 blockquote{
@@ -266,10 +266,14 @@ blockquote{
     background:#fdfdfd;
 }
 blockquote p{
-    font-size:14px;
-    line-height:29px;
-    color:#777;
-    font-style:italic;
+    font-size: 13px;
+    line-height: 29px;
+    color: #777;
+    font-style: italic;
+    background: #eeeeee80;
+    padding: 10px;
+    border: 1px solid #eee;
+    border-radius: 10px;
 }
 blockquote small{
     margin-top:10px;
@@ -349,11 +353,9 @@ blockquote small{
     float: left;
     margin-left: -20px;
 }
-.list-6 li:before{
-    content: "\f101"; /* Angle Double Right */
-    font-family: 'FontAwesome';
-    float: left;
-    margin-left: -20px;
+.list-6 li .fa-angle-double-right{
+    color: #32c8de;
+    margin-right: 10px;
 }
 .list-7 li:before{
     content: "\f0a4"; /* hand-o-right */
@@ -2671,6 +2673,7 @@ ul.nav li.dropdown a {
     display: block;
     position: relative;
     z-index:10;
+    font-family: open sans;
 }
 .header-2 .navy #menu-button {
     display: none;
@@ -3291,7 +3294,7 @@ ul.nav li.dropdown a {
 .smart-forms button,
 .smart-forms select,  
 .smart-forms textarea  {
-    font-family:"Open Sans", sans-serif !important;
+    font-family:"Montserrat", sans-serif !important;
 }
 .smart-forms .radio, 
 .smart-forms .checkbox {
@@ -3334,7 +3337,7 @@ ul.nav li.dropdown a {
 .ui-datepicker { 
     border:1px solid #ddd;
     box-shadow:none;
-    font-family:"Open Sans", sans-serif;
+    font-family:"Montserrat", sans-serif;
 }
 .ui-datepicker:before{ 
     border-color:#ddd; 
@@ -5813,17 +5816,19 @@ ul.nav li.dropdown a {
 }
 .testimonials-one .testimonials-one-content{
     position: relative;
-    background: #fcfcfc;
-    border: 1px solid #f8f8f8;
+    background: #efefef80;
+    border: 1px solid #eee;
     border-bottom:2px solid #eee;
     padding: 0px 0px 0px 0px;
-    margin-bottom:25px;
+    margin-bottom:15px;
     border-radius:3px;
 }
 .testimonials-one .testimonials-one-content p{
     font-size:13px;
     line-height:28px;
     color:#888;
+    padding: 10px;
+    text-align: justify;
 }
 .testimonials-one .testimonials-one-content:after, .testimonials-one .testimonials-one-content:before {
     top: 100%;
@@ -7607,7 +7612,7 @@ footer a:hover {
     padding: 20px 0 25px;
     text-align:center;
     text-transform: uppercase;
-    font-family:"Open Sans",sans-serif;
+    font-family:"Montserrat",sans-serif;
 }
 .welcome-text p{  font-size: 14px;
                   line-height: 24px;
@@ -7661,10 +7666,10 @@ footer a:hover {
 .recent_updates{width:130px; float:left; background-color:#74b942; float: left; color:#fff; font-weight:bold; font-size:14PX; padding:10PX 0px 10px
                     10px;}
 .welcom-title ul li {
-    font-size: 16px;
+    font-size: 14px;
     list-style-type: none;
     color:#fff;
-    padding: 8px 0 0;
+    padding: 8px 0;
 }
 
 .welcom-title ul{padding:0px; margin:0px;}  
@@ -7758,7 +7763,7 @@ footer a:hover {
 
 .tabs_content{}
 .tabs_content .panel.panel-default .panel-heading {
-    background: #fff;
+    background: #eee6;
     border-color: #e5e5e5;
     color: #3b3b3b;
 }

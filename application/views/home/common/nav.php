@@ -26,7 +26,7 @@
                                             <div id="google_translate_element"></div>
                                         </li>
                                         <li><!--<div id="practo-widget-wrapper" data-widget-href="https://www.practo.com/hyderabad/doctor/narasimha-1-dentist" ></div>-->
-                                        <!--<div id="practo-widget-wrapper" data-widget-href="<?= config_item('root_dir'); ?>booknow" ></div>-->
+                                        <!--<div id="practo-widget-wrapper" data-widget-href="<?= base_url(); ?>booknow" ></div>-->
                                         </li>
                                     </ul>
                                 </div>
@@ -43,18 +43,18 @@
             <div class="row">
                 <div class="col-md-4">
                     <!-- Logo section -->
-                    <div class="logo"> <a href="<?= config_item('root_dir'); ?>"><img src="<?= config_item('root_dir'); ?>assets/images/logo/logo4.png" alt="people's dental care" class="img-responsive"></a> </div>
+                    <div class="logo"> <a href="<?= base_url(); ?>"><img src="<?= config_item('root_dir'); ?>assets/images/logo/logo4.png" alt="people's dental care" class="img-responsive"></a> </div>
                 </div>
                 <div class="col-md-8">
                     <div class="navy">
                         <ul>
-                            <li class="active"><a href="<?= config_item('root_dir'); ?>home">Home</a> </li>
-                            <li><a href="<?= config_item('root_dir'); ?>about">Doctors</a> </li>
-                            <li><a href="<?= config_item('root_dir'); ?>treatments">Treatments</a> </li>
-                            <li><a href="<?= config_item('root_dir'); ?>patientcare">Patient Care</a> </li>
-                            <li><a href="<?= config_item('root_dir'); ?>gallery">Gallery</a> </li>
-                            <li><a style="border-right:none;" href="<?= config_item('root_dir'); ?>blog">Blog</a> </li>
-                            <li><a style="background: #5cb85c !important;border: 1px solid #2ee72e;color: #fff;padding: 17px;margin: 26px 0 4px 0;" class="line-nun" href="<?= config_item('root_dir'); ?>booknow">Book Appointment</a></li>
+                            <li class="active"><a href="<?= base_url(); ?>home">Home</a> </li>
+                            <li><a href="<?= base_url(); ?>about">Doctors</a> </li>
+                            <li><a href="<?= base_url(); ?>treatments">Treatments</a> </li>
+                            <li><a href="<?= base_url(); ?>patientcare">Patient Care</a> </li>
+                            <li><a href="<?= base_url(); ?>gallery">Gallery</a> </li>
+                            <li><a style="border-right:none;" href="<?= base_url(); ?>blog">Blog</a> </li>
+                            <li><a style="background: #5cb85c !important;border: 1px solid #2ee72e;color: #fff;padding: 17px;margin: 26px 0 4px 0;" class="line-nun" href="<?= base_url(); ?>booknow">Book Appointment</a></li>
                         </ul>
                     </div>
                 </div>

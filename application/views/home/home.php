@@ -87,7 +87,7 @@
                                     <div class="row">
                                         <div class="col-xs-12 welcom-title col-sm-12 col-md-12">
                                             <ul>
-                                                <li> <?php echo stripslashes(str_replace("\n", "", $value['message'])); ?></li>
+                                                <li> <?= stripslashes(str_replace("\n", "", $value['message'])); ?></li>
                                             </ul>
                                         </div>
                                     </div>
@@ -102,7 +102,7 @@
             </div>
             <div class="container">
                 <div class="welcome-text">
-                    <h3><?php echo stripslashes(str_replace("\n", "", $welcometext['name'])); ?></h3>
+                    <h3><?= stripslashes(str_replace("\n", "", $welcometext['name'])); ?></h3>
                     <p>
                         <?php
                         $sdata7 = preg_replace('/<[^>]*>/', '', $welcometext['content']);
@@ -115,12 +115,12 @@
                     <div class="row">
                         <?php foreach ($treat as $key => $value) { ?>
                             <div class="col-md-3 col-sm-6">
-                                <div class="view view-eighth"> <img src="<?= config_item('root_dir'); ?>assets/images/treatments/<?php echo stripslashes(str_replace("\n", "", $value['image'])); ?>" alt="Orthodontist in hydernagar" class="img-responsive" />
-                                    <h3><?php echo stripslashes(str_replace("\n", "", $value['name'])); ?></h3>
+                                <div class="view view-eighth"> <img src="<?= config_item('root_dir'); ?>assets/images/treatments/<?= stripslashes(str_replace("\n", "", $value['image'])); ?>" alt="Orthodontist in hydernagar" class="img-responsive" />
+                                    <h3><?= stripslashes(str_replace("\n", "", $value['name'])); ?></h3>
                                     <div class="mask">
-                                        <h3><?php echo stripslashes(str_replace("\n", "", $value['name'])); ?></h3>
-                                        <p><?php echo stripslashes(str_replace("\n", "", $value['subtitle'])); ?></p>
-                                        <a href="<?php echo site_url(); ?>treatments/treatment_view/<?php echo stripslashes(str_replace("\n", "", $value['id'])); ?>" class="info">Read More</a> 
+                                        <h3><?= stripslashes(str_replace("\n", "", $value['name'])); ?></h3>
+                                        <p><?= stripslashes(str_replace("\n", "", $value['subtitle'])); ?></p>
+                                        <a href="<?= base_url(); ?>treatments/treatment_view/<?= stripslashes(str_replace("\n", "", $value['id'])); ?>" class="info">Read More</a> 
                                     </div>
                                 </div>
                             </div>
@@ -146,7 +146,7 @@
                                                         ?>
                                                     </p>
                                                 </div>
-                                                <h5><a href="#"><?php echo stripslashes(str_replace("\n", "", $value['name'])); ?></a></h5>
+                                                <h5><a href="#"><?= stripslashes(str_replace("\n", "", $value['name'])); ?></a></h5>
                                             </div>
                                         </div>
                                     <?php } ?>
@@ -160,31 +160,31 @@
                             <?php foreach ($care as $key => $value) { ?>
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <div class="home_articul m-t-10"><a href="<?php echo site_url(); ?>patientcare/view_patient_care/<?php echo stripslashes(str_replace("\n", "", $value['id'])); ?>"><img class="pull-left  postImg img-thumbnail margin10"  height="100" width="120" alt="Dental clinic nizampet" src="<?= config_item('root_dir'); ?>assets/images/care/<?php echo stripslashes(str_replace("\n", "", $value['image'])); ?>"></a>
+                                        <div class="home_articul m-t-10"><a href="<?= base_url(); ?>patientcare/view_patient_care/<?= stripslashes(str_replace("\n", "", $value['id'])); ?>"><img class="pull-left  postImg img-thumbnail margin10"  height="100" width="120" alt="Dental clinic nizampet" src="<?= config_item('root_dir'); ?>assets/images/care/<?= stripslashes(str_replace("\n", "", $value['image'])); ?>"></a>
                                             <article>
-                                                <h1> <a href="<?php echo site_url(); ?>patientcare/view_patient_care/<?php echo stripslashes(str_replace("\n", "", $value['id'])); ?>"><?php echo substr(stripslashes(str_replace("\n", "", $value['name'])), 0, 60); ?></a></h1>
+                                                <h1> <a href="<?= base_url(); ?>patientcare/view_patient_care/<?= stripslashes(str_replace("\n", "", $value['id'])); ?>"><?= substr(stripslashes(str_replace("\n", "", $value['name'])), 0, 60); ?></a></h1>
                                                 <p><?php
                                                     $cdata4 = preg_replace('/<[^>]*>/', '', $value['content']);
                                                     echo substr(stripslashes(str_replace("\n", "", $cdata4)), 0, 100);
                                                     ?>
                                                 </p>
-                                                <a href="<?php echo site_url(); ?>patientcare/view_patient_care/<?php echo stripslashes(str_replace("\n", "", $value['id'])); ?>" class="read-more">Read More</a>
+                                                <a href="<?= base_url(); ?>patientcare/view_patient_care/<?= stripslashes(str_replace("\n", "", $value['id'])); ?>" class="read-more">Read More</a>
                                             </article>
                                         </div>
                                     </div>
                                 </div>
                             <?php } ?>
-                            <a class="read_more" href="<?php echo site_url(); ?>patientcare">View All</a> </div>
+                            <a class="read_more" href="<?= base_url(); ?>patientcare">View All</a> </div>
                         <div class="col-md-3 heding-text">
                             <h6> Videos</h6>
                             <?php foreach ($videos as $key => $value) { ?>
                                 <div class="row">
                                     <div class="thumbnail">
-                                        <iframe width="100%" height="140" src="https://www.youtube.com/embed/<?php echo stripslashes(str_replace("\n", "", $value['url'])); ?>" frameborder="0" allowfullscreen></iframe>
+                                        <iframe width="100%" height="140" src="https://www.youtube.com/embed/<?= stripslashes(str_replace("\n", "", $value['url'])); ?>" frameborder="0" allowfullscreen></iframe>
                                     </div>
                                 </div>
                             <?php } ?>
-                            <a class="read_more " href="<?php echo site_url(); ?>videos">View All</a> 
+                            <a class="read_more " href="<?= base_url(); ?>videos">View All</a> 
                         </div>
                     </div>
                 </div>
@@ -227,7 +227,7 @@
                     <!-- Item -->
                     <?php foreach ($insurance as $key => $value) { ?>
                         <div class="c1-item"> 
-                            <a href="#"><img src="<?= config_item('root_dir'); ?>assets/images/insurance/<?php echo stripslashes(str_replace("\n", "", $value['image'])); ?>" alt="Dental hospital in nizampet" class="img-responsive" /></a>
+                            <a href="#"><img src="<?= config_item('root_dir'); ?>assets/images/insurance/<?= stripslashes(str_replace("\n", "", $value['image'])); ?>" alt="Dental hospital in nizampet" class="img-responsive" /></a>
                             <div class="img-hover"></div>
                         </div>
                     <?php } ?>

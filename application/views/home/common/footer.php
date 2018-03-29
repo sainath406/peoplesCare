@@ -24,9 +24,9 @@
                 <div class="foot-item">
                     <!-- Heading -->
                     <h5 class="bold"><i class="fas fa-user"></i>&nbsp;&nbsp;About Clinic</h5>
-                    <p>
+                    <p style="text-align: justify;">
                         Peoples dental care was established with the motto of providing solutions for all your dental needs . we have world class technology with expert panel of doctors to provide you better diagnosis and treatment planning. We strive for excellence in every aspect of our practice. We took a oath to provide comfortable, reliable and best quality services for our patients.<br><br>...
-                        <a href="<?php echo site_url(); ?>about">Read More</a>
+                        <a href="<?= base_url(); ?>about">Read More</a>
                     </p>
                 </div>
             </div>
@@ -38,12 +38,12 @@
                     <!-- Foot Item Content -->
                     <div class="foot-item-content">
                         <ul class="list-unstyled">
-                            <li><a href="<?php echo site_url(); ?>home"><i class="fas fa-angle-double-right"></i>&nbsp;&nbsp;Home</a> </li>
-                            <li><a href="<?php echo site_url(); ?>about"><i class="fas fa-angle-double-right"></i>&nbsp;&nbsp;About Clinic</a> </li>
-                            <li><a href="<?php echo site_url(); ?>treatments"><i class="fas fa-angle-double-right"></i>&nbsp;&nbsp;Treatments</a> </li>
-                            <li><a href="<?php echo site_url(); ?>patientcare"><i class="fas fa-angle-double-right"></i>&nbsp;&nbsp;Patient Care</a> </li>
+                            <li><a href="<?= base_url(); ?>home"><i class="fas fa-angle-double-right"></i>&nbsp;&nbsp;Home</a> </li>
+                            <li><a href="<?= base_url(); ?>about"><i class="fas fa-angle-double-right"></i>&nbsp;&nbsp;About Clinic</a> </li>
+                            <li><a href="<?= base_url(); ?>treatments"><i class="fas fa-angle-double-right"></i>&nbsp;&nbsp;Treatments</a> </li>
+                            <li><a href="<?= base_url(); ?>patientcare"><i class="fas fa-angle-double-right"></i>&nbsp;&nbsp;Patient Care</a> </li>
                             <li><a href="#"><i class="fas fa-angle-double-right"></i>&nbsp;&nbsp;Fix An Appointment</a> </li>
-                            <li><a href="<?php echo site_url(); ?>gallery"><i class="fas fa-angle-double-right"></i>&nbsp;&nbsp;Gallery</a> </li>
+                            <li><a href="<?= base_url(); ?>gallery"><i class="fas fa-angle-double-right"></i>&nbsp;&nbsp;Gallery</a> </li>
                         </ul>
                     </div>
                 </div>
@@ -56,12 +56,12 @@
                     <!-- Foot Item Content -->
                     <div class="foot-item-content">
                         <ul class="list-unstyled">
-                            <li><a href="<?php echo site_url(); ?>treatments/treatment_view/"><i class="fas fa-angle-double-right"></i>&nbsp;&nbsp;Teeth Whitening</a> </li>
-                            <li><a href="<?php echo site_url(); ?>treatments/treatment_view/"><i class="fas fa-angle-double-right"></i>&nbsp;&nbsp;Oral Surgery</a> </li>
-                            <li><a href="<?php echo site_url(); ?>treatments/treatment_view/"><i class="fas fa-angle-double-right"></i>&nbsp;&nbsp;Gum Treatments</a> </li>
-                            <li><a href="<?php echo site_url(); ?>treatments/treatment_view/"><i class="fas fa-angle-double-right"></i>&nbsp;&nbsp;Child Dentistry</a> </li>
-                            <li><a href="<?php echo site_url(); ?>treatments/treatment_view/"><i class="fas fa-angle-double-right"></i>&nbsp;&nbsp;Orthodontic Treatment</a> </li>
-                            <li><a href="<?php echo site_url(); ?>treatments/treatment_view/"><i class="fas fa-angle-double-right"></i>&nbsp;&nbsp;Dental Implants</a> </li>
+                            <li><a href="<?= base_url(); ?>treatments/treatment_view/18"><i class="fas fa-angle-double-right"></i>&nbsp;&nbsp;Teeth Whitening</a> </li>
+                            <li><a href="<?= base_url(); ?>treatments/treatment_view/17"><i class="fas fa-angle-double-right"></i>&nbsp;&nbsp;Oral Surgery</a> </li>
+                            <li><a href="<?= base_url(); ?>treatments/treatment_view/16"><i class="fas fa-angle-double-right"></i>&nbsp;&nbsp;Gum Treatments</a> </li>
+                            <li><a href="<?= base_url(); ?>treatments/treatment_view/14"><i class="fas fa-angle-double-right"></i>&nbsp;&nbsp;Child Dentistry</a> </li>
+                            <li><a href="<?= base_url(); ?>treatments/treatment_view/13"><i class="fas fa-angle-double-right"></i>&nbsp;&nbsp;Orthodontic Treatment</a> </li>
+                            <li><a href="<?= base_url(); ?>treatments/treatment_view/12"><i class="fas fa-angle-double-right"></i>&nbsp;&nbsp;Dental Implants</a> </li>
                         </ul>
                     </div>
                 </div>
@@ -93,7 +93,7 @@
         <p class="pull-left">© <?= date('Y'); ?> Peoples Dental Care | All Rights Reserved</p>
         <ul class="list-inline pull-right">
             <!-- List -->
-            <li><a href="<?php echo site_url(); ?>" target="_blank"><img src="<?= config_item('root_dir') ?>assets/images/royalitpark-footer-icon.png" alt="dentist in nizampet"></a></li>
+            <li><a href="<?= base_url(); ?>" target="_blank"><img src="<?= config_item('root_dir') ?>assets/images/royalitpark-footer-icon.png" alt="dentist in nizampet"></a></li>
         </ul>
         <!-- Clearfix -->
         <div class="clearfix"></div>
@@ -108,17 +108,13 @@
                 <img class="img-circle" id="img_logo" src="<?= config_item('root_dir') ?>assets/images/doctorlogin-logo.png" alt="dental clinic in nizampet">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <i class="fa fa-times" aria-hidden="true"></i>
-
                 </button>
             </div>
-
             <!-- Begin # DIV Form -->
             <div id="div-forms">
-
                 <!-- Begin # Login Form -->
                 <form id="login-form">
                     <div class="modal-body">
-
                         <input id="login_username" class="form-control" type="text" placeholder="Username " required>
                         <input id="login_password" class="form-control" type="password" placeholder="Password" required>
                         <div class="checkbox">

@@ -3,10 +3,19 @@
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
-class home_model extends CI_Model {
+class Home_model extends CI_Model {
 
     public function __construct() {
         parent::__construct();
+    }
+
+    public function get_styles() {
+        $this->db->select("*");
+        $this->db->from("tbl_styles");
+        $this->db->where('id', 1);
+        $query = $this->db->get();
+        $result = $query->row_array();
+        return $result;
     }
 
     public function get_treatments() {
