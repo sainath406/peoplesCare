@@ -2,6 +2,10 @@
 <html>
     <head>
         <?php $this->load->view('home/common/head'); ?>
+        <style>
+            .error_frm {color:red; font-size: 12px; display: inline-block;}
+            .form_div {padding: 20px; background: #eeeeeeb3; border: 1px solid #ddd;}
+        </style>
     </head>
     <body>
         <?php $this->load->view('home/common/nav'); ?>
@@ -32,79 +36,93 @@
                                         </div>
                                     <?php } ?>
                                     <form method="POST" role="form" name="contact">
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="form-group has-feedback">
-                                                    <label class="menu-text"> SERVICE : </label>
-                                                    <select class="form-control" name="service" required>
-                                                        <option value="">Select Service</option>
-                                                        <option value="Pediatric Dentistry">Pediatric Dentistry</option>
-                                                        <option value="Cosmetic Dentistry"> Cosmetic Dentistry</option>
-                                                        <option value="Root Canal Treatments"> Root Canal Treatments </option>
-                                                        <option value="Orthodontists"> Orthodontists </option>
-                                                        <option value="Restorative Dentistry"> Restorative Dentistry </option>
-                                                        <option value="Pediatric Dentists "> Pediatric Dentists </option>
-                                                        <option value="Invisalign- Clear Braces"> Invisalign- Clear Braces </option>
-                                                        <option value="Crown Bridge"> Crown &amp; Bridge </option>
-                                                    </select>
+                                        <div class="form_div">
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label class="menu-text"> NAME : </label>
+                                                        <input type="text" class="form-control" name="name" placeholder="Name" value="<?= set_value('name') ?>">
+                                                        <?= form_error('name'); ?>
+                                                    </div>
+                                                </div>
 
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label class="menu-text"> MOBILE : </label>
+                                                        <input type="text" class="form-control" name="mobile" placeholder="Phone Number" value="<?= set_value('mobile') ?>">
+                                                        <?= form_error('mobile'); ?>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label class="menu-text"> EMAIL : </label>
+                                                        <input type="text" class="form-control" name="email" placeholder="E-mail" value="<?= set_value('email') ?>">
+                                                        <?= form_error('email'); ?>
+                                                    </div>
                                                 </div>
                                             </div>
-                                            <div class="col-md-6">
-                                                <label class="menu-text"> BEST DATE : </label>
-                                                <div class="row">
-                                                    <div class="col-md-12">
-                                                        <div class="form-group">
-                                                            <input type="text" class="form-control" name="date" placeholder="dd/mm/yyyy" required>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group has-feedback">
+                                                        <label class="menu-text"> SERVICE : </label>
+                                                        <select class="form-control" name="service">
+                                                            <option value="" <?= set_select('service', '', TRUE); ?>>Select Service</option>
+                                                            <option value="Pediatric Dentistry" <?= set_select('service', 'Pediatric Dentistry'); ?>>Pediatric Dentistry</option>
+                                                            <option value="Cosmetic Dentistry" <?= set_select('service', 'Cosmetic Dentistry'); ?>> Cosmetic Dentistry</option>
+                                                            <option value="Root Canal Treatments" <?= set_select('service', 'Root Canal Treatments'); ?>> Root Canal Treatments </option>
+                                                            <option value="Orthodontists" <?= set_select('service', 'Orthodontists'); ?>> Orthodontists </option>
+                                                            <option value="Restorative Dentistry" <?= set_select('service', 'Restorative Dentistry'); ?>> Restorative Dentistry </option>
+                                                            <option value="Pediatric Dentists" <?= set_select('service', 'Pediatric Dentists'); ?>> Pediatric Dentists </option>
+                                                            <option value="Invisalign- Clear Braces" <?= set_select('service', 'Invisalign- Clear Braces'); ?>> Invisalign- Clear Braces </option>
+                                                            <option value="Crown Bridge" <?= set_select('service', 'Crown Bridge'); ?>> Crown &amp; Bridge </option>
+                                                        </select>
+                                                        <?= form_error('service'); ?>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label class="menu-text"> BEST DATE : </label>
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <div class="form-group">
+                                                                <input type="date" class="form-control" name="date" placeholder="Choose your date" autocomplete="off" value="<?= set_value('date') ?>">
+                                                                <?= form_error('date'); ?>
+                                                            </div>
                                                         </div>
                                                     </div>
-
                                                 </div>
                                             </div>
-                                            <div class="col-md-4">
-                                                <div class="form-group">
-                                                    <input type="text" class="form-control" name="name" placeholder="Name" required>
+                                            
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group has-feedback">
+                                                        <label class="menu-text"> BEST TIME TO CALL : </label>
+                                                        <select class="form-control" name="time" id=""  placeholder="Select Time" >                
+                                                            <option value="" <?= set_select('time', '', TRUE); ?>>Select Time</option>
+                                                            <option value="Morning" <?= set_select('time', 'Morning'); ?>>Morning</option>
+                                                            <option value="Afternoon" <?= set_select('time', 'Afternoon'); ?>>Afternoon</option>
+                                                            <option value="Evening" <?= set_select('time', 'Evening'); ?>>Evening</option>
+                                                        </select>
+                                                        <?= form_error('time'); ?>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group has-feedback">
+                                                        <label class="menu-text"> ARE YOU A NEW PATIENT? : </label>
+                                                        <select class="form-control" name="patient_type">
+                                                            <option value="" <?= set_select('patient_type', '', TRUE); ?>>ARE YOU A NEW PATIENT?</option>
+                                                            <option value="Yes" <?= set_select('patient_type', 'Yes'); ?>>Yes</option>
+                                                            <option value="No" <?= set_select('patient_type', 'No'); ?>>No</option>
+                                                        </select>
+                                                        <?= form_error('patient_type'); ?>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <div class="g-recaptcha" data-sitekey="6LdVPyEUAAAAANGWre1ztDhQDARwEtPyb9YgTEWT"></div>
                                                 </div>
                                             </div>
-
-                                            <div class="col-md-4">
-                                                <div class="form-group">
-                                                    <!--<label class="menu-text"> Date : </label>-->
-                                                    <input type="text" class="form-control" name="mobile" placeholder="Phone Number" required>
-                                                </div>
-                                            </div>
-
-                                            <div class="col-md-4">
-                                                <div class="form-group">
-                                                    <input type="text" class="form-control" name="email" placeholder="E-mail" required>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group has-feedback">
-                                                    <label class="menu-text"> BEST TIME TO CALL : </label>
-                                                    <select class="form-control" name="time" id=""  placeholder="Select Time" required>                
-                                                        <option value="">Select Time</option>
-                                                        <option value="Morning">Morning</option>
-                                                        <option value="Afternoon">Afternoon</option>
-                                                        <option value="Evening">Evening</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group has-feedback">
-                                                    <label class="menu-text"> ARE YOU A NEW PATIENT? : </label>
-                                                    <select class="form-control" name="patient_type" required>
-                                                        <option value="">ARE YOU A NEW PATIENT?</option>
-                                                        <option value="Yes">Yes</option>
-                                                        <option value="No">No</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-12">
-                                                <div class="g-recaptcha" data-sitekey="6LdVPyEUAAAAANGWre1ztDhQDARwEtPyb9YgTEWT"></div>
-                                            </div>
+                                            <input type="submit" name="submit" value="submit" class="btn btn-red" style="margin-top: 15px;"/>
                                         </div>
-                                        <input type="submit" name="submit" value="submit" class="btn btn-red" />
                                     </form>
                                 </div>
                                 <br />

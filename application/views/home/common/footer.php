@@ -99,121 +99,6 @@
         <div class="clearfix"></div>
     </div>
 </footer>
-</div>
-<!-- BEGIN # MODAL LOGIN -->
-<div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header" align="center">
-                <img class="img-circle" id="img_logo" src="<?= config_item('root_dir') ?>assets/images/doctorlogin-logo.png" alt="dental clinic in nizampet">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <i class="fa fa-times" aria-hidden="true"></i>
-                </button>
-            </div>
-            <!-- Begin # DIV Form -->
-            <div id="div-forms">
-                <!-- Begin # Login Form -->
-                <form id="login-form">
-                    <div class="modal-body">
-                        <input id="login_username" class="form-control" type="text" placeholder="Username " required>
-                        <input id="login_password" class="form-control" type="password" placeholder="Password" required>
-                        <div class="checkbox">
-                            <label>
-                                <input type="checkbox"> Remember me
-                            </label>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <div>
-                            <button type="submit" class="btn btn-primary btn-lg btn-block">Login</button>
-                        </div>
-                        <div>
-                            <button id="login_lost_btn" type="button" class="btn btn-link">Lost Password?</button>
-                            <button id="login_register_btn" type="button" class="btn btn-link">Register</button>
-                        </div>
-                    </div>
-                </form>
-                <!-- End # Login Form -->
-
-                <!-- Begin | Lost Password Form -->
-                <form id="lost-form" style="display:none;">
-                    <div class="modal-body">
-
-                        <input id="lost_email" class="form-control" type="text" placeholder="E-Mail" required>
-                    </div>
-                    <div class="modal-footer">
-                        <div>
-                            <button type="submit" class="btn btn-primary btn-lg btn-block">Send</button>
-                        </div>
-                        <div>
-                            <button id="lost_login_btn" type="button" class="btn btn-link">Log In</button>
-                            <button id="lost_register_btn" type="button" class="btn btn-link">Register</button>
-                        </div>
-                    </div>
-                </form>
-                <!-- End | Lost Password Form -->
-
-                <!-- Begin | Register Form -->
-                <form id="register-form" style="display:none;">
-                    <div class="modal-body">
-
-                        <input id="register_username" class="form-control" type="text" placeholder="Username " required>
-                        <input id="register_email" class="form-control" type="text" placeholder="E-Mail" required>
-                        <input id="register_password" class="form-control" type="password" placeholder="Password" required>
-                    </div>
-                    <div class="modal-footer">
-                        <div>
-                            <button type="submit" class="btn btn-primary btn-lg btn-block">Register</button>
-                        </div>
-                        <div>
-                            <button id="register_login_btn" type="button" class="btn btn-link">Log In</button>
-                            <button id="register_lost_btn" type="button" class="btn btn-link">Lost Password?</button>
-                        </div>
-                    </div>
-                </form>
-                <!-- End | Register Form -->
-            </div>
-            <!-- End # DIV Form -->
-        </div>
-    </div>
-</div>
-<!-- END # MODAL LOGIN -->
-
-
-<!-- BEGIN # MODAL LOGIN -->
-<div class="modal fade" id="doctor-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header" align="center">
-                <img class="img-circle" id="img_logo" src="<?= config_item('root_dir') ?>assets/images/doctorlogin-logo.png" alt="dental hospital in nizampet">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <i class="fa fa-times" aria-hidden="true"></i>
-                </button>
-            </div>
-
-            <!-- Begin # DIV Form -->
-            <div id="div-forms">
-                <!-- Begin # Login Form -->
-                <form id="login-form">
-                    <div class="modal-body">
-                        <input id="login_username" class="form-control" type="text" placeholder="Username " required>
-                        <input id="login_password" class="form-control" type="password" placeholder="Password" required>
-                    </div>
-                    <div class="modal-footer">
-                        <div>
-                            <button type="submit" class="btn btn-primary btn-lg btn-block">Login</button>
-                        </div>
-                    </div>
-                </form>
-                <!-- End # Login Form -->
-
-            </div>
-            <!-- End # DIV Form -->
-
-        </div>
-    </div>
-</div>
-<!-- END # MODAL LOGIN -->
 
 
 <!-- Scroll to top -->
@@ -227,14 +112,12 @@
 <script src="<?= config_item('root_dir') ?>assets/js/respond.min.js"></script>
 <script src="<?= config_item('root_dir') ?>assets/js/html5shiv.js"></script>
 <script src="<?= config_item('root_dir') ?>assets/js/main.js"></script>
-<script src="<?= config_item('root_dir') ?>assets/js/custom.js"></script>
 <!-------sociles---icons-->
 <link rel="stylesheet" href="<?= config_item('root_dir') ?>assets/css/contact-buttons.css">
 <script src="<?= config_item('root_dir') ?>assets/js/jquery.contact-buttons.js"></script>
 <script src="<?= config_item('root_dir') ?>assets/js/social-demo.js"></script>
 <!-------sociles---icons-->
-<!------login---->
-<script src="<?= config_item('root_dir') ?>assets/js/doctorlogin.js"></script>
+
 <link href="<?= config_item('root_dir') ?>assets/css/jquery.fancybox.min.css" rel="stylesheet">
 <script src="<?= config_item('root_dir') ?>assets/js/jquery.fancybox.min.js"></script>
 <script>
