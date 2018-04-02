@@ -1,0 +1,93 @@
+body {
+    font-family: work sans;
+}
+.admin-logoo {
+    background: #3c8dbc;
+    padding: 5px 10px;
+    margin-bottom: 0px;
+    font-size: 30px;
+}
+.admin-logoo a {
+    color: #FFF !important;
+    font-family: Cinzel;
+}
+.error {
+    color: red;
+    font-size: 12px!important;
+}
+.frm_vld {
+    margin-top: 3px;
+}
+.m-heading {
+    padding: 20px;
+    background: #FFF;
+    box-shadow: 0 0px 0px 0 rgba(0, 0, 0, 0.2), 0 0px 8px 0 rgba(0, 0, 0, 0.19);
+}
+
+.m-heading h4 {
+    font-family: raleway;
+}
+
+.loggedin-logo a {
+    color: #FFF !important;
+    font-family: Cinzel;
+}
+
+.main-header li a {
+    font-size: 15px;
+}
+
+.well {
+    background-color: #FFF;
+    margin-top: 20px;
+    padding: 20px 15px;
+}
+
+.search_bar .form-group {
+    margin-bottom: 0;
+}
+
+.dropdown1 {
+    padding: 3px 8px;
+    border-radius: 3px;
+}
+
+#example1 th{
+    text-align: center;
+    font-family: raleway;
+    letter-spacing: 1px;
+    background: #ecf0f59e;
+}
+
+#example1 td {
+    font-size: 13px;
+}
+
+#example1 table, #example1 th, #example1 td {
+    border: 1px solid #ddd;
+}
+
+.middle-heading {
+    margin: 10px 0 !important;
+    padding: 10px;
+    background: #007bff0d;
+    border-left: 2px solid #007bff96;
+    color: #007bff;
+    font-family: quicksand;
+}
+
+.view_file {
+    background: #FFF;
+    margin-top: 25px;
+    padding-top: 15px;
+    margin-bottom: 25px;
+    overflow: hidden;
+}
+
+.view_file table td {
+    padding: 7px 15px !important;
+}
+
+.box {
+    border-top: 0;
+}
