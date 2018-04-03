@@ -12,11 +12,12 @@
                 </div>
                 <div class="container-fluid">
                     <div class="well search_bar">
-                        <form role="form" action="<?= base_url('admin_login/index'); ?>" method="get">
+                        <form role="form" action="<?= base_url('admin_login/contacted_members'); ?>" method="get">
                             <div class="row">
                                 <div class="col-md-3 col-sm-4">
                                     <div class="form-group">
                                         <input type="text" class="form-control" name="name" autocomplete="off" id="name" placeholder="Search by name" value="<?= $name; ?>">
+                                        <input type="hidden" name="limit" value="<?= $limit; ?>">
                                     </div>
                                 </div>
                                 <div class="col-md-3 col-sm-4">
@@ -26,7 +27,7 @@
                                 </div>
                                 <div class="col-md-3 col-sm-4">
                                     <button type="submit" class="btn btn-primary">Submit</button>
-                                    <a href="<?= base_url('admin_login'); ?>" class="btn btn-default">Clear</a>
+                                    <a href="<?= base_url('appointment_members'); ?>" class="btn btn-default">Clear</a>
                                 </div>
                             </div>
                         </form>
@@ -35,7 +36,7 @@
                         <div class="row" style="padding: 10px 10px 0px 10px;">
                             <div class="col-md-2">
                                 <span>
-                                    <form role="form" class="form-horizontal" action="<?= base_url('admin_login/index' . $querystring); ?>" method="get">
+                                    <form role="form" class="form-horizontal" action="<?= base_url('admin_login/contacted_members' . $querystring); ?>" method="get">
                                         Records
                                         <select name="limit" class="records-control dropdown1" onchange="this.form.submit();">
                                             <option value="10" <?= ($limit == '10 ') ? 'selected' : ''; ?>>10</option>
@@ -44,6 +45,8 @@
                                             <option value="75" <?= ($limit == '75') ? 'selected' : ''; ?>>75</option>
                                             <option value="100" <?= ($limit == '100') ? 'selected' : ''; ?>>100</option>
                                         </select>
+                                        <input type="hidden" name="name" value="<?= $name; ?>">
+                                        <input type="hidden" name="email" value="<?= $email; ?>">
                                     </form>
                                 </span>
                             </div>

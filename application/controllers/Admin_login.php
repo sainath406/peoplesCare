@@ -40,7 +40,7 @@ class Admin_login extends CI_Controller {
         $config['first_link'] = 'First';
         $config['last_link'] = 'Last';
         $QUERY_STRING = $this->removeQueryVal($_SERVER['QUERY_STRING'], 'page');
-        $config['base_url'] = site_url('admin_login/index' . $QUERY_STRING);
+        $config['base_url'] = base_url('admin_login/contacted_members' . $QUERY_STRING);
         $config['suffix'] = '';
         $config['first_url'] = '';
         $this->pagination->initialize($config);
