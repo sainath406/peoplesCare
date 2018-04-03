@@ -9,5 +9,5 @@
 <link rel="stylesheet" href="<?= config_item('root_dir'); ?>assets/admin/dist/css/AdminLTE.min.css">
 <link rel="stylesheet" href="<?= config_item('root_dir'); ?>assets/admin/plugins/iCheck/square/blue.css">
 <link rel="stylesheet" href="<?= config_item('root_dir'); ?>assets/admin/dist/css/skins/_all-skins.min.css">
-<link href="https://fonts.googleapis.com/css?family=Work+Sans|Raleway|Open+Sans|Quicksand|Cinzel|Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Work+Sans|Raleway|Montserrat|Cinzel|Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic" rel="stylesheet">
 <link rel="stylesheet" href="<?= config_item('root_dir'); ?>assets/admin/css/common.css">

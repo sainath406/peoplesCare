@@ -4,8 +4,8 @@
         <?php $this->load->view('common/head_admin'); ?>
     </head>
     <body class="hold-transition skin-blue layout-top-nav">
+        <?php $this->load->view('common/header_admin'); ?>
         <div class="wrapper">
-            <?php $this->load->view('common/header_admin'); ?>
             <div class="content-wrapper">
                 <div class="m-heading">
                     <h4 style="margin: 0;">Contacted Members Details</h4>
@@ -108,13 +108,6 @@
                 </div>
             </div>
         </div>
-        <script src="<?= config_item('root_dir'); ?>assets/admin/components/jquery/dist/jquery.min.js"></script>
-        <script src="<?= config_item('root_dir'); ?>assets/admin/components/bootstrap/dist/js/bootstrap.min.js"></script>
-        <script src="<?= config_item('root_dir'); ?>assets/admin/components/datatables.net/js/jquery.dataTables.min.js"></script>
-        <script src="<?= config_item('root_dir'); ?>assets/admin/components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
-        <script src="<?= config_item('root_dir'); ?>assets/admin/components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
-        <script src="<?= config_item('root_dir'); ?>assets/admin/components/fastclick/lib/fastclick.js"></script>
-        <script src="<?= config_item('root_dir'); ?>assets/admin/dist/js/adminlte.min.js"></script>
-        <script src="<?= config_item('root_dir'); ?>assets/admin/dist/js/demo.js"></script>
+        <?php $this->load->view('common/footer_admin'); ?>
     </body>
 </html>

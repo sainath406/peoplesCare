@@ -11,6 +11,11 @@ class Admin_login extends CI_Controller {
     }
 
     public function index() {
+        $data['title'] = "Clinic Dashboard";
+        $this->load->view('admin/dashboard', $data);
+    }
+
+    public function contacted_members() {
         $data['title'] = "Contacted Members";
         $data['start'] = ($this->input->get('page')) ? $this->input->get('page') : 0;
         $data['limit'] = ($this->input->get('limit')) ? $this->input->get('limit') : 25;
@@ -44,7 +49,7 @@ class Admin_login extends CI_Controller {
         $data['pagination'] = $this->pagination->create_links();
         $data['querystring'] = $QUERY_STRING;
 
-        $this->load->view('admin/nav_admin', $data);
+        $this->load->view('admin/contacted_members', $data);
     }
 
     function removeQueryVal($qry, $qryKey) {

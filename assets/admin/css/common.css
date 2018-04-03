@@ -91,3 +91,21 @@ body {
 .box {
     border-top: 0;
 }
+
+.navbar .nav > li > a {
+    font-size: 13px;
+    padding: 15px 10px;
+    border-right: 1px solid #3a7ba275;
+}
+
+.main-header li a {
+    font-size: 13px;
+}
+
+.login-name {
+    max-width: 300px;
+    font-family: Montserrat;
+    font-size: 15px !important;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
