@@ -14,6 +14,7 @@
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Patients <span class="caret"></span></a>
                         <ul class="dropdown-menu" role="menu">
+                            <li><a href="<?= base_url('admin_login/addPatient'); ?>">Add Patient</a></li>
                             <li><a href="<?= base_url('patient_view'); ?>">Patient View</a></li>
                             <li><a href="<?= base_url('patient_appointments'); ?>">Appointments</a></li> 
                             <li><a href="<?= base_url('patient_vital_signs'); ?>">Vital Signs</a></li>

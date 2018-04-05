@@ -1,5 +1,5 @@
 body {
-    font-family: work sans;
+    font-family: work sans, sans-serif;
 }
 .admin-logoo {
     background: #3c8dbc;
@@ -31,10 +31,6 @@ body {
 .loggedin-logo a {
     color: #FFF !important;
     font-family: Cinzel;
-}
-
-.main-header li a {
-    font-size: 15px;
 }
 
 .well {
@@ -100,6 +96,7 @@ body {
 
 .main-header li a {
     font-size: 13px;
+    font-family: montserrat;
 }
 
 .login-name {
@@ -108,4 +105,18 @@ body {
     font-size: 15px !important;
     white-space: nowrap;
     text-overflow: ellipsis;
+}
+
+.font-mont {
+    font-family: Montserrat, sans-serif;
+}
+
+.skin-blue .main-header .navbar .nav>li>a {
+    min-width: 75px;
+    text-align: center;
+    font-family: Montserrat, sans-serif;
+}
+
+.datepicker {
+    z-index: 10000 !important;
 }

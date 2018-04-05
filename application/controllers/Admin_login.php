@@ -84,4 +84,9 @@ class Admin_login extends CI_Controller {
         }
     }
 
+    public function addPatient() {
+        $data['title'] = "Add Patient";
+        $this->load->view('admin/addPatient', $data);
+    }
+
 }
