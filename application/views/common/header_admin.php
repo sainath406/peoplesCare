@@ -9,7 +9,7 @@
             </div>
             <div class="collapse navbar-collapse pull-left" id="navbar-collapse">
                 <ul class="nav navbar-nav">
-                    <li><a href="<?= base_url('dashboard'); ?>">Dashboard</a></li>
+                    <li><a href="<?= base_url('admin_login'); ?>">Dashboard</a></li>
                     <li><a href="<?= base_url('calendar'); ?>">Calendar</a></li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Patients <span class="caret"></span></a>

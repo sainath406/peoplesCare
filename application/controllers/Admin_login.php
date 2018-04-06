@@ -8,6 +8,7 @@ class Admin_login extends CI_Controller {
         parent::__construct();
         $this->valid_user();
         $this->load->library(array('pagination'));
+        $this->load->model('admin/patient_model');
     }
 
     public function index() {
@@ -86,7 +87,38 @@ class Admin_login extends CI_Controller {
 
     public function addPatient() {
         $data['title'] = "Add Patient";
+        $data['med_his'] = $this->patient_model->getMedicalHistory();
+        $data['groups'] = $this->patient_model->getGroups();
+        $data['refs'] = $this->patient_model->getReferredBy();
+        $data['bloods'] = $this->patient_model->getBloodGroups();
+        $data['langs'] = $this->patient_model->getLanguages();
         $this->load->view('admin/addPatient', $data);
     }
 
+//    public function convert() {
+//        $data = "English,
+//            Hindi,
+//            Telugu,
+//            Marathi,
+//            Gujarati,
+//            Tamil,
+//            Malayalam,
+//            Bengali,
+//            Punjabi,
+//            Kannada,
+//            Assamese,
+//            Odia";
+//        $data1 = explode(",", $data);
+//        $now = date('Y-m-d H:i:s', strtotime('now'));
+//        foreach ($data1 as $da) {
+//            $data2 = array(
+//                'language' => trim($da),
+//                'created' => $now
+//            );
+//            $insert = $this->db->insert('languages', $data2);
+//            if ($insert) {
+//                echo '<pre> Success';
+//            }
+//        }
+//    }
 }

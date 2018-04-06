@@ -120,3 +120,39 @@ body {
 .datepicker {
     z-index: 10000 !important;
 }
+
+.form-control[readonly] {
+    background-color: #FFF !important;
+    opacity: 1;
+    cursor: pointer;
+}
+
+label {
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 26px;
+}
+
+input, select, textarea {
+    font-size: 12px !important;
+}
+
+.btn-file {
+    position: relative;
+    overflow: hidden;
+}
+.btn-file input[type=file] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 100%;
+    min-height: 100%;
+    font-size: 100px;
+    text-align: right;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    outline: none;
+    background: white;
+    cursor: inherit;
+    display: block;
+}
