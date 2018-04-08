@@ -24,7 +24,6 @@ class Booknow extends CI_Controller {
         $this->form_validation->set_rules('date', 'Date', 'trim|required');
         $this->form_validation->set_rules('time', 'Time', 'trim|required');
         $this->form_validation->set_rules('patient_type', 'Patient Type', 'trim|required');
-        $this->form_validation->set_message('checkDateFormat', 'Enter Valid Date Format');
         if ($this->form_validation->run() == FALSE) {
             $this->load->view('home/booknow', $data);
         } else {

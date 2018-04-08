@@ -92,7 +92,99 @@ class Admin_login extends CI_Controller {
         $data['refs'] = $this->patient_model->getReferredBy();
         $data['bloods'] = $this->patient_model->getBloodGroups();
         $data['langs'] = $this->patient_model->getLanguages();
-        $this->load->view('admin/addPatient', $data);
+        $this->load->library('form_validation');
+        $this->form_validation->set_error_delimiters('<div class="error_frm">', '</div>');
+        $this->form_validation->set_rules('patient_name', 'Name', 'trim|required|regex_match[/^([a-zA-Z]|\s)+$/]|min_length[2]|max_length[100]', array('regex_match' => '%s only accepts alphabet.'));
+        $this->form_validation->set_rules('patient_id', 'Patient Id', 'trim|max_length[50]');
+        $this->form_validation->set_rules('gender', 'Gender', 'trim|required');
+        $this->form_validation->set_rules('dob', 'Date Of Birth');
+        $this->form_validation->set_rules('reference', 'Referred By');
+        $this->form_validation->set_rules('blood', 'Blood Group');
+        $this->form_validation->set_rules('language', 'Language');
+        $this->form_validation->set_rules('landline', 'Landline', 'trim|numeric|max_length[12]');
+        $this->form_validation->set_rules('street', 'Street');
+        $this->form_validation->set_rules('locality', 'Locality');
+        $this->form_validation->set_rules('city', 'City');
+        $this->form_validation->set_rules('pincode', 'Pincode');
+        $this->form_validation->set_rules('email', 'Email', 'trim|valid_email|max_length[100]');
+        $this->form_validation->set_rules('p_mobile', 'Primary Mobile', 'trim|required|numeric|min_length[7]|max_length[12]');
+        $this->form_validation->set_rules('s_mobile', 'Secondary Mobile', 'trim|numeric|min_length[7]|max_length[12]');
+        $this->form_validation->set_rules('age', 'Age', 'trim|required|numeric|max_length[3]');
+        if ($this->form_validation->run() == FALSE) {
+            $this->load->view('admin/addPatient', $data);
+        } else {
+            $this->load->model('common/upload_model');
+            $profile = 'profile';
+            $y = $_FILES[$profile]['name'];
+            if ($y != '') {
+                $file_upl_data = $this->upload_model->uploadDocuments($profile, 'Profile');
+                if ($file_upl_data['success'] == 1) {
+                    $profile_picture = $file_upl_data['file_name'];
+                } else {
+                    $profile_picture = '';
+                }
+            } else {
+                $profile_picture = '';
+            }
+
+            $now = date('Y-m-d H:i:s', strtotime('now'));
+            $data = array(
+                'p_name' => $this->input->post('patient_name'),
+                'p_id' => $this->input->post('patient_id'),
+                'gender' => $this->input->post('gender'),
+                'p_age' => $this->input->post('age'),
+                'dob' => $this->input->post('dob'),
+                'ref_id' => $this->input->post('reference'),
+                'blood_id' => $this->input->post('blood'),
+                'profile' => $profile_picture,
+                'p_mobile' => $this->input->post('p_mobile'),
+                's_mobile' => $this->input->post('s_mobile'),
+                'lang_id' => $this->input->post('language'),
+                'landline' => $this->input->post('landline'),
+                'email' => $this->input->post('email'),
+                'street' => $this->input->post('street'),
+                'locality' => $this->input->post('locality'),
+                'city' => $this->input->post('city'),
+                'pincode' => $this->input->post('pincode'),
+                'created' => $now,
+                'modified' => $now
+            );
+            $insert = $this->db->insert('patients', $data);
+            if ($insert) {
+                $insert_id = $this->db->insert_id();
+                if ($this->input->post('med_his')) {
+                    $med_his = implode(',', $this->input->post('med_his'));
+                    $data1 = array(
+                        'patient_id' => $insert_id,
+                        'med_his' => $med_his,
+                        'created' => $now,
+                        'modified' => $now
+                    );
+                    $insert1 = $this->db->insert('patient_medical_history', $data1);
+                }
+
+                if ($this->input->post('groups')) {
+                    $groups = implode(',', $this->input->post('groups'));
+                    $data2 = array(
+                        'patient_id' => $insert_id,
+                        'groups' => $groups,
+                        'created' => $now,
+                        'modified' => $now
+                    );
+                    $insert2 = $this->db->insert('patient_groups', $data2);
+                }
+                $this->session->set_flashdata('success', 'Patient Created Successfully.');
+            } else {
+                $this->session->set_flashdata('error', 'Patient is not created, Try again later');
+            }
+            redirect(base_url('admin_login/addPatient'));
+        }
+    }
+
+    public function addAppointment() {
+        $this->load->library('form_validation');
+        $data['title'] = "Add Appointment";
+        $this->load->view('admin/addAppointment', $data);
     }
 
 //    public function convert() {
