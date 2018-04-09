@@ -76,28 +76,42 @@
                                                     <?= form_error('email'); ?>
                                                 </div>
                                             </div>
-<!--                                            <div class="col-sm-4">
+                                            <div class="col-sm-4">
                                                 <div class="form-group">
-                                                    <label>Date Of Birth</label>
-                                                    <div class="input-group date">
-                                                        <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
-                                                        <input type="text" class="form-control pull-right" autocomplete="off" id="datepicker" name="dob" value="<?= set_value('dob') ?>" readonly placeholder="Choose Date Of Birth">
-                                                        <?= form_error('dob'); ?>
-                                                    </div>
+                                                    <label>Doctors</label>
+                                                    <select class="form-control select2" id="doctors" name="doctors" style="width: 100%;">
+                                                        <option value="" <?= set_select('doctors``', "", TRUE) ?>> -- Select Doctor -- </option>
+                                                        <?php foreach ($doctors as $doctor) { ?>
+                                                            <option value="<?= $doctor->id; ?>" <?= set_select('doctors', $doctor->id) ?>><?= $doctor->doctor_name; ?></option>
+                                                        <?php } ?>
+                                                    </select>
+                                                    <?= form_error('doctors'); ?>
                                                 </div>
                                             </div>
                                             <div class="col-sm-4">
                                                 <div class="form-group">
-                                                    <label>Referred By</label>
-                                                    <select class="form-control select2" id="reference" name="reference" style="width: 100%;">
-                                                        <option value="" <?= set_select('reference', "", TRUE) ?>> -- Select Reference -- </option>
-                                                        <?php foreach ($refs as $ref) { ?>
-                                                            <option value="<?= $ref->id; ?>" <?= set_select('reference', $ref->id) ?>><?= $ref->ref_name; ?></option>
+                                                    <label>Category</label>
+                                                    <select class="form-control select2" id="category" name="category" style="width: 100%;">
+                                                        <option value="" <?= set_select('category``', "", TRUE) ?>> -- Select Category -- </option>
+                                                        <?php foreach ($categories as $category) { ?>
+                                                            <option value="<?= $category->id; ?>" <?= set_select('category', $category->id) ?>><?= $category->category_name; ?></option>
                                                         <?php } ?>
                                                     </select>
-                                                    <?= form_error('reference'); ?>
+                                                    <?= form_error('category'); ?>
                                                 </div>
-                                            </div>-->
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="col-sm-4">
+                                                <div class="form-group">
+                                                    <label>Scheduled On</label>
+                                                    <div class="input-group date">
+                                                        <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
+                                                        <input type="text" class="form-control pull-right" autocomplete="off" id="datepicker" name="schedule_date" value="<?= set_value('schedule_date') ?>" readonly placeholder="Choose Schedule Date">
+                                                        <?= form_error('schedule_date'); ?>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -115,6 +129,41 @@
         <script src="<?= config_item('root_dir'); ?>assets/admin/components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
         <script src="<?= config_item('root_dir'); ?>assets/admin/components/select2/dist/js/select2.full.min.js"></script>
         <script src="<?= config_item('root_dir'); ?>assets/admin/plugins/iCheck/icheck.min.js"></script>
-        <?php $this->load->view('admin/common/addPatient'); ?>
+        <script>
+                                                        $(function () {
+                                                            $('.select2').select2()
+
+                                                            $('#datepicker').datepicker({
+                                                                autoclose: true,
+                                                                startDate: 'd',
+                                                                Default: 'today',
+                                                                format: 'dd-mm-yyyy'
+                                                            })
+                                                        });
+        </script>
+        <script type="text/javascript">
+            function isNumberPress(evt) {
+                evt = (evt) ? evt : window.event;
+                var charCode = (evt.which) ? evt.which : evt.keyCode;
+                if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+                    return false;
+                }
+                return true;
+            }
+
+            $(document).ready(function () {
+                $("input, textarea").on("keypress", function (e) {
+                    if (e.which === 32 && !this.value.length)
+                        e.preventDefault();
+                });
+            });
+
+            function allowalphaspace(event) {
+                var inputValue = event.which;
+                if ((inputValue > 47 && inputValue < 58) && (inputValue != 32)) {
+                    event.preventDefault();
+                }
+            }
+        </script>
     </body>
 </html>

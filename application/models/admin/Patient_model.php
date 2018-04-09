@@ -22,4 +22,12 @@ class Patient_model extends CI_Model {
         return $this->db->get('languages')->result();
     }
 
+    public function getDoctors() {
+        return $this->db->get('doctors')->result();
+    }
+
+    public function getCategories() {
+        return $this->db->get('categories')->result();
+    }
+
 }

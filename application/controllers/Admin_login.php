@@ -146,6 +146,7 @@ class Admin_login extends CI_Controller {
                 'locality' => $this->input->post('locality'),
                 'city' => $this->input->post('city'),
                 'pincode' => $this->input->post('pincode'),
+                'reg_status_id' => 1,
                 'created' => $now,
                 'modified' => $now
             );
@@ -182,8 +183,10 @@ class Admin_login extends CI_Controller {
     }
 
     public function addAppointment() {
-        $this->load->library('form_validation');
         $data['title'] = "Add Appointment";
+        $data['doctors'] = $this->patient_model->getDoctors();
+        $data['categories'] = $this->patient_model->getCategories();
+        $this->load->library('form_validation');
         $this->load->view('admin/addAppointment', $data);
     }
 
