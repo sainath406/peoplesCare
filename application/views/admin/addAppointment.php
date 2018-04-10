@@ -10,6 +10,7 @@
             hr {margin-bottom: 10px; margin-top: 10px;}
             .error_frm {font-size: 12px; color: red; display: inline-block;}
             .star {color: red;}
+            .select2-container .select2-search--inline .select2-search__field {height: 22px;}
         </style>
     </head>
     <body class="hold-transition skin-blue layout-top-nav">
@@ -107,9 +108,23 @@
                                                     <label>Scheduled On</label>
                                                     <div class="input-group date">
                                                         <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
-                                                        <input type="text" class="form-control pull-right" autocomplete="off" id="datepicker" name="schedule_date" value="<?= set_value('schedule_date') ?>" readonly placeholder="Choose Schedule Date">
+                                                        <input type="text" class="form-control pull-right" data-provide="datepicker" autocomplete="off" id="datepicker" name="schedule_date" value="<?= set_value('schedule_date') ?>" readonly placeholder="Choose Schedule Date">
                                                         <?= form_error('schedule_date'); ?>
                                                     </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <div class="form-group">
+                                                    <label>Planned Procedures</label>
+                                                    <select class="form-control select2" name="procedures" multiple="multiple" data-placeholder="Select a Procedures" style="width: 100%;">
+                                                        <option>Alabama</option>
+                                                        <option>Alaska</option>
+                                                        <option>California</option>
+                                                        <option>Delaware</option>
+                                                        <option>Tennessee</option>
+                                                        <option>Texas</option>
+                                                        <option>Washington</option>
+                                                    </select>
                                                 </div>
                                             </div>
                                         </div>
@@ -136,8 +151,8 @@
                                                             $('#datepicker').datepicker({
                                                                 autoclose: true,
                                                                 startDate: 'd',
-                                                                Default: 'today',
-                                                                format: 'dd-mm-yyyy'
+                                                                format: 'dd-mm-yyyy',
+                                                                todayHighlight: true
                                                             })
                                                         });
         </script>
