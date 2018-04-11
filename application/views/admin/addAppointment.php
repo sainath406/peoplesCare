@@ -10,7 +10,7 @@
             hr {margin-bottom: 10px; margin-top: 10px;}
             .error_frm {font-size: 12px; color: red; display: inline-block;}
             .star {color: red;}
-            .select2-container .select2-search--inline .select2-search__field {height: 22px;}
+            .select2-container .select2-search--inline .select2-search__field {height: 22px;padding-left: 7px;}
         </style>
     </head>
     <body class="hold-transition skin-blue layout-top-nav">
@@ -125,6 +125,15 @@
                                                         <option>Texas</option>
                                                         <option>Washington</option>
                                                     </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label>Notes</label>
+                                                    <textarea name="description" class="form-control" rows="3" autocomplete="off" placeholder="Appointment Description"><?= set_value('description') ?></textarea>
+                                                    <?= form_error('description'); ?>
                                                 </div>
                                             </div>
                                         </div>
