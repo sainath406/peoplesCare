@@ -2,9 +2,12 @@
 <html>
     <head>
         <?php $this->load->view('home/common/head'); ?>
+        <link rel="stylesheet" href="<?= config_item('root_dir'); ?>assets/admin/components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
         <style>
             .error_frm {color:red; font-size: 12px; display: inline-block;}
             .form_div {padding: 20px; background: #eeeeeeb3; border: 1px solid #ddd;}
+            #datepicker {cursor: pointer; background: #FFF;}
+            .datepicker-days table th, .datepicker-days table td {padding: 0px !important;}
         </style>
     </head>
     <body>
@@ -85,14 +88,14 @@
                                                     <div class="row">
                                                         <div class="col-md-12">
                                                             <div class="form-group">
-                                                                <input type="date" class="form-control" name="date" placeholder="Choose your date" autocomplete="off" value="<?= set_value('date') ?>">
+                                                                <input type="text" class="form-control" name="date" data-provide="datepicker" autocomplete="off" id="datepicker" placeholder="Choose your date" autocomplete="off" value="<?= set_value('date') ?>" readonly>
                                                                 <?= form_error('date'); ?>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                            
+
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <div class="form-group has-feedback">
@@ -154,6 +157,16 @@
             </div>
         </div>
         <?php $this->load->view('home/common/footer'); ?>
+        <script src="<?= config_item('root_dir'); ?>assets/admin/components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+        <script>
+            $(function () {
+                $('#datepicker').datepicker({
+                    autoclose: true,
+                    startDate: 'd',
+                    format: 'dd-mm-yyyy',
+                })
+            });
+        </script>
         <script type="text/javascript">
             (function (d, s, id) {
                 var js, script = d.getElementsByTagName(s)[0];

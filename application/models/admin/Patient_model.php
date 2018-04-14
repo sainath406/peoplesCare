@@ -29,5 +29,9 @@ class Patient_model extends CI_Model {
     public function getCategories() {
         return $this->db->get('categories')->result();
     }
+    
+    public function getProcedures() {
+        return $this->db->get('procedures')->result();
+    }
 
 }

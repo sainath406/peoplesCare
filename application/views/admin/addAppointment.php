@@ -80,6 +80,7 @@
                                             <div class="col-sm-4">
                                                 <div class="form-group">
                                                     <label>Doctors</label>
+                                                    <span class="star">*</span>
                                                     <select class="form-control select2" id="doctors" name="doctors" style="width: 100%;">
                                                         <option value="" <?= set_select('doctors``', "", TRUE) ?>> -- Select Doctor -- </option>
                                                         <?php foreach ($doctors as $doctor) { ?>
@@ -92,6 +93,7 @@
                                             <div class="col-sm-4">
                                                 <div class="form-group">
                                                     <label>Category</label>
+                                                    <span class="star">*</span>
                                                     <select class="form-control select2" id="category" name="category" style="width: 100%;">
                                                         <option value="" <?= set_select('category``', "", TRUE) ?>> -- Select Category -- </option>
                                                         <?php foreach ($categories as $category) { ?>
@@ -106,6 +108,7 @@
                                             <div class="col-sm-4">
                                                 <div class="form-group">
                                                     <label>Scheduled On</label>
+                                                    <span class="star">*</span>
                                                     <div class="input-group date">
                                                         <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
                                                         <input type="text" class="form-control pull-right" data-provide="datepicker" autocomplete="off" id="datepicker" name="schedule_date" value="<?= set_value('schedule_date') ?>" readonly placeholder="Choose Schedule Date">
@@ -116,15 +119,12 @@
                                             <div class="col-md-8">
                                                 <div class="form-group">
                                                     <label>Planned Procedures</label>
-                                                    <select class="form-control select2" name="procedures" multiple="multiple" data-placeholder="Select a Procedures" style="width: 100%;">
-                                                        <option>Alabama</option>
-                                                        <option>Alaska</option>
-                                                        <option>California</option>
-                                                        <option>Delaware</option>
-                                                        <option>Tennessee</option>
-                                                        <option>Texas</option>
-                                                        <option>Washington</option>
+                                                    <select class="form-control select2" name="procedures[]" multiple="multiple" data-placeholder="Select a Procedures" style="width: 100%;">
+                                                        <?php foreach ($procedures as $pro) { ?>
+                                                            <option value="<?= $pro->id ?>" <?= set_select('procedures[]', $pro->id) ?>><?= $pro->procedure_name ?></option>
+                                                        <?php } ?>
                                                     </select>
+                                                    <?= form_error('procedures[]'); ?>
                                                 </div>
                                             </div>
                                         </div>
@@ -155,14 +155,13 @@
         <script src="<?= config_item('root_dir'); ?>assets/admin/plugins/iCheck/icheck.min.js"></script>
         <script>
                                                         $(function () {
-                                                            $('.select2').select2()
-
+                                                            $('.select2').select2();
                                                             $('#datepicker').datepicker({
                                                                 autoclose: true,
                                                                 startDate: 'd',
                                                                 format: 'dd-mm-yyyy',
                                                                 todayHighlight: true
-                                                            })
+                                                            });
                                                         });
         </script>
         <script type="text/javascript">

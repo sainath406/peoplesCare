@@ -186,8 +186,46 @@ class Admin_login extends CI_Controller {
         $data['title'] = "Add Appointment";
         $data['doctors'] = $this->patient_model->getDoctors();
         $data['categories'] = $this->patient_model->getCategories();
+        $data['procedures'] = $this->patient_model->getProcedures();
         $this->load->library('form_validation');
-        $this->load->view('admin/addAppointment', $data);
+        $this->form_validation->set_error_delimiters('<div class="error_frm">', '</div>');
+        $this->form_validation->set_rules('patient_name', 'Name', 'trim|required|regex_match[/^([a-zA-Z]|\s)+$/]|min_length[2]|max_length[100]', array('regex_match' => '%s only accepts alphabet.'));
+        $this->form_validation->set_rules('patient_id', 'Patient Id', 'trim|max_length[50]');
+        $this->form_validation->set_rules('email', 'Email', 'trim|valid_email|max_length[100]');
+        $this->form_validation->set_rules('mobile', 'Mobile', 'trim|required|numeric|min_length[7]|max_length[12]');
+        $this->form_validation->set_rules('procedures[]', 'Procedures');
+        $this->form_validation->set_rules('doctors', 'Doctor', 'trim|required');
+        $this->form_validation->set_rules('category', 'Category', 'trim|required');
+        $this->form_validation->set_rules('schedule_date', 'schedule_date', 'trim|required');
+        $this->form_validation->set_rules('description', 'Notes');
+        if ($this->form_validation->run() == FALSE) {
+            $this->load->view('admin/addAppointment', $data);
+        } else {
+            $now = date('Y-m-d H:i:s', strtotime('now'));
+            $procedures = implode(',', $this->input->post('procedures'));
+            $schedule_date = date('Y-m-d', strtotime($this->input->post('schedule_date')));
+            $data = array(
+                'p_name' => $this->input->post('patient_name'),
+                'p_id' => $this->input->post('patient_id'),
+                'email' => $this->input->post('email'),
+                'p_mobile' => $this->input->post('mobile'),
+                'procedures' => $procedures,
+                'doctor_id' => $this->input->post('doctors'),
+                'category_id' => $this->input->post('category'),
+                'schedule_date' => $schedule_date,
+                'description' => $this->input->post('description'),
+                'reg_status_id' => 2,
+                'created' => $now,
+                'modified' => $now
+            );
+            $insert = $this->db->insert('patients', $data);
+            if ($insert) {
+                $this->session->set_flashdata('success', 'Appointment Created Successfully.');
+            } else {
+                $this->session->set_flashdata('error', 'Appointment is not created, Try again later');
+            }
+            redirect(base_url('admin_login/addAppointment'));
+        }
     }
 
 //    public function convert() {
