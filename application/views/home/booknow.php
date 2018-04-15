@@ -28,14 +28,17 @@
                                 <!-- Contact Form -->
                                 <div class="">
                                     <!-- Form -->
-                                    <?php if ($this->session->flashdata('msg_succ') != '') { ?>
-                                        <div class="alert alert-block alert-success">
-                                            <button type="button" class="close" data-dismiss="alert">
-                                                <i class="ace-icon fa fa-times"></i>
-                                            </button>
-                                            <p>
-                                                <?= $this->session->flashdata('msg_succ') ? $this->session->flashdata('msg_succ') : ''; ?>
-                                            </p>
+                                    <?php if ($this->session->flashdata('success') != '') { ?>
+                                        <div class="alert alert-success alert-dismissible">
+                                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                                            <h4><i class="icon fa fa-check"></i> Success!</h4>
+                                            <?= $this->session->flashdata('success'); ?>
+                                        </div>
+                                    <?php } if ($this->session->flashdata('error') != '') { ?>
+                                        <div class="alert alert-danger alert-dismissible">
+                                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                                            <h4><i class="icon fa fa-ban"></i> Failed!</h4>
+                                            <?= $this->session->flashdata('error'); ?>
                                         </div>
                                     <?php } ?>
                                     <form method="POST" role="form" name="contact">
@@ -43,7 +46,7 @@
                                             <div class="row">
                                                 <div class="col-md-4">
                                                     <div class="form-group">
-                                                        <label class="menu-text"> NAME : </label>
+                                                        <label class="menu-text"> NAME </label>
                                                         <input type="text" class="form-control" name="name" placeholder="Name" value="<?= set_value('name') ?>">
                                                         <?= form_error('name'); ?>
                                                     </div>
@@ -51,7 +54,7 @@
 
                                                 <div class="col-md-4">
                                                     <div class="form-group">
-                                                        <label class="menu-text"> MOBILE : </label>
+                                                        <label class="menu-text"> MOBILE </label>
                                                         <input type="text" class="form-control" name="mobile" placeholder="Phone Number" value="<?= set_value('mobile') ?>">
                                                         <?= form_error('mobile'); ?>
                                                     </div>
@@ -59,7 +62,7 @@
 
                                                 <div class="col-md-4">
                                                     <div class="form-group">
-                                                        <label class="menu-text"> EMAIL : </label>
+                                                        <label class="menu-text"> EMAIL </label>
                                                         <input type="text" class="form-control" name="email" placeholder="E-mail" value="<?= set_value('email') ?>">
                                                         <?= form_error('email'); ?>
                                                     </div>
@@ -68,23 +71,18 @@
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <div class="form-group has-feedback">
-                                                        <label class="menu-text"> SERVICE : </label>
+                                                        <label class="menu-text"> SERVICE </label>
                                                         <select class="form-control" name="service">
                                                             <option value="" <?= set_select('service', '', TRUE); ?>>Select Service</option>
-                                                            <option value="Pediatric Dentistry" <?= set_select('service', 'Pediatric Dentistry'); ?>>Pediatric Dentistry</option>
-                                                            <option value="Cosmetic Dentistry" <?= set_select('service', 'Cosmetic Dentistry'); ?>> Cosmetic Dentistry</option>
-                                                            <option value="Root Canal Treatments" <?= set_select('service', 'Root Canal Treatments'); ?>> Root Canal Treatments </option>
-                                                            <option value="Orthodontists" <?= set_select('service', 'Orthodontists'); ?>> Orthodontists </option>
-                                                            <option value="Restorative Dentistry" <?= set_select('service', 'Restorative Dentistry'); ?>> Restorative Dentistry </option>
-                                                            <option value="Pediatric Dentists" <?= set_select('service', 'Pediatric Dentists'); ?>> Pediatric Dentists </option>
-                                                            <option value="Invisalign- Clear Braces" <?= set_select('service', 'Invisalign- Clear Braces'); ?>> Invisalign- Clear Braces </option>
-                                                            <option value="Crown Bridge" <?= set_select('service', 'Crown Bridge'); ?>> Crown &amp; Bridge </option>
+                                                            <?php foreach ($services as $service) { ?>
+                                                                <option value="<?= $service->id; ?>" <?= set_select('service', $service->id); ?>><?= $service->service_name; ?></option>
+                                                            <?php } ?>
                                                         </select>
                                                         <?= form_error('service'); ?>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
-                                                    <label class="menu-text"> BEST DATE : </label>
+                                                    <label class="menu-text"> BEST DATE </label>
                                                     <div class="row">
                                                         <div class="col-md-12">
                                                             <div class="form-group">
@@ -99,7 +97,7 @@
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <div class="form-group has-feedback">
-                                                        <label class="menu-text"> BEST TIME TO CALL : </label>
+                                                        <label class="menu-text"> BEST TIME TO CALL </label>
                                                         <select class="form-control" name="time" id=""  placeholder="Select Time" >                
                                                             <option value="" <?= set_select('time', '', TRUE); ?>>Select Time</option>
                                                             <option value="Morning" <?= set_select('time', 'Morning'); ?>>Morning</option>
@@ -111,7 +109,7 @@
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group has-feedback">
-                                                        <label class="menu-text"> ARE YOU A NEW PATIENT? : </label>
+                                                        <label class="menu-text"> ARE YOU A NEW PATIENT? </label>
                                                         <select class="form-control" name="patient_type">
                                                             <option value="" <?= set_select('patient_type', '', TRUE); ?>>ARE YOU A NEW PATIENT?</option>
                                                             <option value="Yes" <?= set_select('patient_type', 'Yes'); ?>>Yes</option>

@@ -24,4 +24,8 @@ class Booknow_model extends CI_Model {
         return $result;
     }
 
+    public function getServices() {
+        return $this->db->get('book_services')->result();
+    }
+
 }

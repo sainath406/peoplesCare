@@ -15,6 +15,7 @@ class Booknow extends CI_Controller {
     public function index() {
         $data['fstyles'] = $this->home_model->get_styles();
         $data['speak'] = $this->home_model->get_speak();
+        $data['services'] = $this->my_model->getServices();
         $this->load->library('form_validation');
         $this->form_validation->set_error_delimiters('<div class="error_frm">', '</div>');
         $this->form_validation->set_rules('name', 'Name', 'trim|required|regex_match[/^([a-zA-Z]|\s)+$/]|min_length[2]|max_length[100]', array('regex_match' => '%s only accepts alphabet.'));
@@ -43,30 +44,30 @@ class Booknow extends CI_Controller {
             if (empty($status['success'])) {
                 $date_val = date('Y-m-d', strtotime($this->input->post('date')));
                 $data = array(
-                    'service' => trim($this->input->post('service')),
-                    'date' => $date_val,
-                    'name' => trim($this->input->post('name')),
+                    'service_id' => trim($this->input->post('service')),
+                    'best_date' => $date_val,
+                    'p_name' => trim($this->input->post('name')),
                     'email' => trim($this->input->post('email')),
-                    'mobile' => trim($this->input->post('mobile')),
-                    'time' => trim($this->input->post('time')),
-                    'patient_type' => trim(($this->input->post('patient_type'))),
+                    'p_mobile' => trim($this->input->post('mobile')),
+                    'best_time' => trim($this->input->post('time')),
+                    'is_new_patient' => trim(($this->input->post('patient_type'))),
+                    'reg_status_id' => 3,
                     'created' => $now,
                     'modified' => $now
                 );
-                $result = $this->db->insert("tbl_contacted", $data);
+                $result = $this->db->insert("patients", $data);
                 if ($result) {
                     $assigned_message = "Hi, Someone is Contacted Through Peoplesdentalcare... Here are the details. Name: " . $this->input->post('name') . " , Email:  " . $this->input->post('email') . ", Mobile:  " . $this->input->post('mobile') . " , Date:  " . $this->input->post('date') . ", Time:  " . $this->input->post('time') . " , Service Type:  " . $this->input->post('service') . " , New Patient:  " . $this->input->post('patient_type') . " .Thank You ...!";
                     $this->sms("8143011112", $assigned_message);
                     $msg = '<table  border="1" style="text-align:center;"><tr><td style="padding: 15px;">Name:</td><td style="padding: 15px;">' . $this->input->post('name') . '</td></tr><tr><td style="padding: 15px;">Email :</td><td style="padding: 15px;">' . $this->input->post('email') . '</td></tr><tr><td style="padding: 15px;">Mobile:</td><td style="padding: 15px;">' . $this->input->post('mobile') . '</td></tr><tr><td style="padding: 15px;">Date:</td><td style="padding: 15px;">' . $this->input->post('date') . '</td></tr><tr><td style="padding: 15px;">Time:</td><td style="padding: 15px;">' . $this->input->post('time') . '</td></tr><tr><td style="padding: 15px;">Service Type:</td><td style="padding: 15px;">' . $this->input->post('service') . '</td></tr><tr><td style="padding: 15px;">New Patient:</td><td style="padding: 15px;">' . $this->input->post('patient_type') . '</td></tr></table>';
                     $this->emailssend($msg);
-                    $this->session->set_flashdata('msg_succ', 'Contacted Successfully.');
-                    redirect(base_url() . "booknow");
+                    $this->session->set_flashdata('success', 'Your Request Has Been Received');
                 } else {
-                    $this->session->set_flashdata('msg_succ', 'Failed try again.');
-                    redirect(base_url() . "booknow");
+                    $this->session->set_flashdata('error', 'Request Not Received, Try again later.');
                 }
+                redirect(base_url() . "booknow");
             } else {
-                $this->session->set_flashdata('msg_succ', 'Failed try again.');
+                $this->session->set_flashdata('error', 'Failed try again.');
                 redirect(base_url() . "booknow");
             }
         }
