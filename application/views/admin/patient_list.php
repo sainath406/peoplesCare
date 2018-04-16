@@ -3,7 +3,7 @@
     <head>
         <?php $this->load->view('common/head_admin'); ?>
         <style>
-            .patients {padding-top: 20px; padding-bottom: 20px; overflow: hidden;}
+            .patients {padding-top: 15px; padding-bottom: 15px; overflow: hidden;}
             .profile_name {white-space: nowrap; text-overflow: ellipsis; font-size: 12px; margin-top: 5px; overflow: hidden; text-transform: capitalize; line-height: 19px; margin-bottom: 0; padding: 5px 0px; border-bottom: 1px solid #ddd; border-top: 1px solid #ddd;}
             .profile_list {padding: 5px; border: 1px solid #ddd;}
             .profile_list img { border: 1px solid #eee; max-height: 139px;}
@@ -87,7 +87,7 @@
                         <div class="box">
                             <div class="box-body">
                                 <div class="patients">
-                                    <div class="col-md-12">
+                                    
                                         <?php foreach ($patients as $patient) { ?>
                                             <div class="col-md-2">
                                                 <div class="profile_list">
@@ -104,7 +104,7 @@
                                                 </div>
                                             </div>
                                         <?php } ?>
-                                    </div>
+                                    
                                     <?= $pagination; ?>
                                 </div>
                             </div>
