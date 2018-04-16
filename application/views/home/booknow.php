@@ -23,9 +23,6 @@
                         </div>
                         <div class="row">
                             <div class="col-md-8">
-                                <div class="well">
-                                    <iframe width="100%" height="315" src="https://www.youtube.com/embed/AnKFLpc5lIA" frameborder="0" allowfullscreen></iframe>
-                                </div>
                                 <!-- Contact Form -->
                                 <div class="">
                                     <!-- Form -->
@@ -58,7 +55,7 @@
                                                     <div class="form-group">
                                                         <label class="menu-text">MOBILE</label>
                                                         <span class="star">*</span>
-                                                        <input type="text" class="form-control" name="mobile" placeholder="Phone Number" value="<?= set_value('mobile') ?>">
+                                                        <input type="text" class="form-control" name="mobile" placeholder="Phone Number" value="<?= set_value('mobile') ?>" onkeypress="return isNumberPress(event)">
                                                         <?= form_error('mobile'); ?>
                                                     </div>
                                                 </div>
@@ -135,6 +132,9 @@
                                     </form>
                                 </div>
                                 <br />
+                                <div class="well">
+                                    <iframe width="100%" height="315" src="https://www.youtube.com/embed/AnKFLpc5lIA" frameborder="0" allowfullscreen></iframe>
+                                </div>
                             </div>
                             <div class="col-md-4 col-sm-6">
                                 <div class="well">
@@ -185,6 +185,23 @@
                 js.src = "https://www.practo.com/bundles/practopractoapp/js/marketing/doc-widget.js";
                 script.parentNode.insertBefore(js, script);
             })(document, 'script', 'practo-widget-js');
+        </script>
+        <script type="text/javascript">
+            function isNumberPress(evt) {
+                evt = (evt) ? evt : window.event;
+                var charCode = (evt.which) ? evt.which : evt.keyCode;
+                if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+                    return false;
+                }
+                return true;
+            }
+
+            $(document).ready(function () {
+                $("input, textarea").on("keypress", function (e) {
+                    if (e.which === 32 && !this.value.length)
+                        e.preventDefault();
+                });
+            });
         </script>
     </body>
 </html>

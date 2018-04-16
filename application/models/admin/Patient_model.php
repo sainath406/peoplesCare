@@ -41,7 +41,7 @@ class Patient_model extends CI_Model {
         $reg = $search['reg'];
         $start = $search['start'];
         $limit = $search['limit'];
-        $this->db->select('p_name, profile, p_mobile');
+        $this->db->select('id, p_name, profile, p_mobile');
         $this->db->from('patients');
         if ($name) {
             $this->db->like('p_name', $name, 'after');

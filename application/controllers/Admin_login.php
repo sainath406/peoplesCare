@@ -202,7 +202,11 @@ class Admin_login extends CI_Controller {
             $this->load->view('admin/addAppointment', $data);
         } else {
             $now = date('Y-m-d H:i:s', strtotime('now'));
-            $procedures = implode(',', $this->input->post('procedures'));
+            if ($this->input->post('procedures')) {
+                $procedures = implode(',', $this->input->post('procedures'));
+            } else {
+                $procedures = '';
+            }
             $schedule_date = date('Y-m-d', strtotime($this->input->post('schedule_date')));
             $data = array(
                 'p_name' => $this->input->post('patient_name'),
@@ -231,7 +235,7 @@ class Admin_login extends CI_Controller {
     public function patient_list() {
         $data['title'] = "Patients List";
         $data['start'] = ($this->input->get('page')) ? $this->input->get('page') : 0;
-        $data['limit'] = ($this->input->get('limit')) ? $this->input->get('limit') : 25;
+        $data['limit'] = ($this->input->get('limit')) ? $this->input->get('limit') : 12;
         $data['starting'] = ($this->input->get('page')) ? ($data['start'] - 1 ) * $data['limit'] : 0;
         $data['name'] = ($this->input->get('name')) ? $this->input->get('name') : '';
         $data['email'] = ($this->input->get('email')) ? $this->input->get('email') : '';

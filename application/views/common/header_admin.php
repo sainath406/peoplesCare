@@ -16,6 +16,7 @@
                         <ul class="dropdown-menu" role="menu">
                             <li><a href="<?= base_url('admin_login/addPatient'); ?>">Add Patient</a></li>
                             <li><a href="<?= base_url('admin_login/addAppointment'); ?>">Add Appointment</a></li> 
+                            <li><a href="<?= base_url('admin_login/patient_list'); ?>">Patients List</a></li> 
                             <li><a href="<?= base_url('patient_vital_signs'); ?>">Vital Signs</a></li>
                             <li><a href="<?= base_url('patient_clinical_notes'); ?>">Clinical Notes</a></li>
                             <li><a href="<?= base_url('patient_treatment_plans'); ?>">Treatment Plans</a></li>
