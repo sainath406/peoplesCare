@@ -58,10 +58,10 @@ class Booknow extends CI_Controller {
                 $result = $this->db->insert("patients", $data);
                 if ($result) {
                     $assigned_message = "Hi, Someone is Contacted Through Peoplesdentalcare... Here are the details. Name: " . $this->input->post('name') . " , Email:  " . $this->input->post('email') . ", Mobile:  " . $this->input->post('mobile') . " , Date:  " . $this->input->post('date') . ", Time:  " . $this->input->post('time') . " , Service Type:  " . $this->input->post('service') . " , New Patient:  " . $this->input->post('patient_type') . " .Thank You ...!";
-                    $this->sms("8143011112", $assigned_message);
+                    //$this->sms("8143011112", $assigned_message);
                     $msg = '<table  border="1" style="text-align:center;"><tr><td style="padding: 15px;">Name:</td><td style="padding: 15px;">' . $this->input->post('name') . '</td></tr><tr><td style="padding: 15px;">Email :</td><td style="padding: 15px;">' . $this->input->post('email') . '</td></tr><tr><td style="padding: 15px;">Mobile:</td><td style="padding: 15px;">' . $this->input->post('mobile') . '</td></tr><tr><td style="padding: 15px;">Date:</td><td style="padding: 15px;">' . $this->input->post('date') . '</td></tr><tr><td style="padding: 15px;">Time:</td><td style="padding: 15px;">' . $this->input->post('time') . '</td></tr><tr><td style="padding: 15px;">Service Type:</td><td style="padding: 15px;">' . $this->input->post('service') . '</td></tr><tr><td style="padding: 15px;">New Patient:</td><td style="padding: 15px;">' . $this->input->post('patient_type') . '</td></tr></table>';
-                    $this->emailssend($msg);
-                    $this->session->set_flashdata('success', 'Your Request Has Been Received');
+                    //$this->emailssend($msg);
+                    $this->session->set_flashdata('success', 'Your Request Has Been Received.');
                 } else {
                     $this->session->set_flashdata('error', 'Request Not Received, Try again later.');
                 }

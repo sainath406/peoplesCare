@@ -8,6 +8,7 @@
             .form_div {padding: 20px; background: #eeeeeeb3; border: 1px solid #ddd;}
             #datepicker {cursor: pointer; background: #FFF;}
             .datepicker-days table th, .datepicker-days table td {padding: 0px !important;}
+            .star {color: red;}
         </style>
     </head>
     <body>
@@ -46,7 +47,8 @@
                                             <div class="row">
                                                 <div class="col-md-4">
                                                     <div class="form-group">
-                                                        <label class="menu-text"> NAME </label>
+                                                        <label class="menu-text">NAME</label>
+                                                        <span class="star">*</span>
                                                         <input type="text" class="form-control" name="name" placeholder="Name" value="<?= set_value('name') ?>">
                                                         <?= form_error('name'); ?>
                                                     </div>
@@ -54,7 +56,8 @@
 
                                                 <div class="col-md-4">
                                                     <div class="form-group">
-                                                        <label class="menu-text"> MOBILE </label>
+                                                        <label class="menu-text">MOBILE</label>
+                                                        <span class="star">*</span>
                                                         <input type="text" class="form-control" name="mobile" placeholder="Phone Number" value="<?= set_value('mobile') ?>">
                                                         <?= form_error('mobile'); ?>
                                                     </div>
@@ -62,7 +65,8 @@
 
                                                 <div class="col-md-4">
                                                     <div class="form-group">
-                                                        <label class="menu-text"> EMAIL </label>
+                                                        <label class="menu-text">EMAIL</label>
+                                                        <span class="star">*</span>
                                                         <input type="text" class="form-control" name="email" placeholder="E-mail" value="<?= set_value('email') ?>">
                                                         <?= form_error('email'); ?>
                                                     </div>
@@ -71,7 +75,8 @@
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <div class="form-group has-feedback">
-                                                        <label class="menu-text"> SERVICE </label>
+                                                        <label class="menu-text">SERVICE</label>
+                                                        <span class="star">*</span>
                                                         <select class="form-control" name="service">
                                                             <option value="" <?= set_select('service', '', TRUE); ?>>Select Service</option>
                                                             <?php foreach ($services as $service) { ?>
@@ -82,7 +87,8 @@
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
-                                                    <label class="menu-text"> BEST DATE </label>
+                                                    <label class="menu-text">BEST DATE</label>
+                                                    <span class="star">*</span>
                                                     <div class="row">
                                                         <div class="col-md-12">
                                                             <div class="form-group">
@@ -97,7 +103,8 @@
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <div class="form-group has-feedback">
-                                                        <label class="menu-text"> BEST TIME TO CALL </label>
+                                                        <label class="menu-text">BEST TIME TO CALL</label>
+                                                        <span class="star">*</span>
                                                         <select class="form-control" name="time" id=""  placeholder="Select Time" >                
                                                             <option value="" <?= set_select('time', '', TRUE); ?>>Select Time</option>
                                                             <option value="Morning" <?= set_select('time', 'Morning'); ?>>Morning</option>
@@ -109,7 +116,8 @@
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group has-feedback">
-                                                        <label class="menu-text"> ARE YOU A NEW PATIENT? </label>
+                                                        <label class="menu-text">ARE YOU A NEW PATIENT?</label>
+                                                        <span class="star">*</span>
                                                         <select class="form-control" name="patient_type">
                                                             <option value="" <?= set_select('patient_type', '', TRUE); ?>>ARE YOU A NEW PATIENT?</option>
                                                             <option value="Yes" <?= set_select('patient_type', 'Yes'); ?>>Yes</option>
