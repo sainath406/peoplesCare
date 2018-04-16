@@ -101,6 +101,7 @@ body {
     font-size: 15px !important;
     white-space: nowrap;
     text-overflow: ellipsis;
+    overflow: hidden;
 }
 
 .font-mont {
