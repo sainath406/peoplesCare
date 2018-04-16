@@ -228,6 +228,45 @@ class Admin_login extends CI_Controller {
         }
     }
 
+    public function patient_list() {
+        $data['title'] = "Patients List";
+        $data['start'] = ($this->input->get('page')) ? $this->input->get('page') : 0;
+        $data['limit'] = ($this->input->get('limit')) ? $this->input->get('limit') : 25;
+        $data['starting'] = ($this->input->get('page')) ? ($data['start'] - 1 ) * $data['limit'] : 0;
+        $data['name'] = ($this->input->get('name')) ? $this->input->get('name') : '';
+        $data['email'] = ($this->input->get('email')) ? $this->input->get('email') : '';
+        $data['phone'] = ($this->input->get('phone')) ? $this->input->get('phone') : '';
+        $data['reg'] = ($this->input->get('reg')) ? $this->input->get('reg') : '';
+        $search_options = array(
+            'start' => $data['starting'],
+            'limit' => $data['limit'],
+            'name' => $data['name'],
+            'email' => $data['email'],
+            'phone' => $data['phone'],
+            'reg' => $data['reg']
+        );
+        $this->load->model('admin/patient_model');
+        $patients = $this->patient_model->getPatients($search_options);
+        $config['use_page_numbers'] = TRUE;
+        $config['page_query_string'] = TRUE;
+        $config['use_global_url_suffix'] = FALSE;
+        $config['query_string_segment'] = 'page';
+        $config['total_rows'] = $patients['ttl_rows'];
+        $config['per_page'] = $data['limit'];
+        $config['first_link'] = 'First';
+        $config['last_link'] = 'Last';
+        $QUERY_STRING = $this->removeQueryVal($_SERVER['QUERY_STRING'], 'page');
+        $config['base_url'] = base_url('admin_login/patient_list' . $QUERY_STRING);
+        $config['suffix'] = '';
+        $config['first_url'] = '';
+        $this->pagination->initialize($config);
+        $data['ttl_rows'] = $patients['ttl_rows'];
+        $data['patients'] = $patients['patients'];
+        $data['pagination'] = $this->pagination->create_links();
+        $data['querystring'] = $QUERY_STRING;
+        $this->load->view('admin/patient_list', $data);
+    }
+
 //    public function convert() {
 //        $data = "English,
 //            Hindi,
