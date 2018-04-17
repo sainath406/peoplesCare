@@ -186,7 +186,13 @@ class Admin_login extends CI_Controller {
         $data['procedures'] = $this->patient_model->getProcedures();
         $this->load->library('form_validation');
         $this->form_validation->set_error_delimiters('<div class="error_frm">', '</div>');
-        $this->form_validation->set_rules('patient_name', 'Name', 'trim|required|regex_match[/^([a-zA-Z]|\s)+$/]|min_length[2]|max_length[100]', array('regex_match' => '%s only accepts alphabet.'));
+        $this->form_validation->set_rules('patient_name', 'Name', 'trim|required');
+        $this->form_validation->set_rules('hidden_patient', 'Name');
+        if ($this->input->post('hidden_patient')) {
+            $this->form_validation->set_rules('mobile', 'Mobile', 'trim|required|numeric|min_length[7]|max_length[12]');
+        } else {
+            $this->form_validation->set_rules('mobile', 'Mobile', 'trim|required|numeric|min_length[7]|max_length[12]|is_unique[patients.p_mobile]', array('is_unique' => 'Patient Already Exist'));
+        }
         $this->form_validation->set_rules('procedures[]', 'Procedures');
         $this->form_validation->set_rules('doctors', 'Doctor', 'trim|required');
         $this->form_validation->set_rules('category', 'Category', 'trim|required');
@@ -196,24 +202,36 @@ class Admin_login extends CI_Controller {
             $this->load->view('admin/addAppointment', $data);
         } else {
             $now = date('Y-m-d H:i:s', strtotime('now'));
-            if ($this->input->post('procedures')) {
-                $procedures = implode(',', $this->input->post('procedures'));
-            } else {
-                $procedures = '';
-            }
+            $procedures = (($this->input->post('procedures')) ? implode(',', $this->input->post('procedures')) : '');
             $schedule_date = date('Y-m-d', strtotime($this->input->post('schedule_date')));
+            if (empty($this->input->post('hidden_patient'))) {
+                $dataa = array(
+                    'p_name' => $this->input->post('patient_name'),
+                    'p_mobile' => $this->input->post('mobile'),
+                    'created' => $now,
+                    'modified' => $now
+                );
+                $insert1 = $this->db->insert('patients', $dataa);
+                if ($insert1) {
+                    $insert_id = $this->db->insert_id();
+                } else {
+                    echo 'Insertion error';
+                    exit;
+                }
+            } else {
+                $insert_id = $this->input->post('hidden_patient');
+            }
             $data = array(
-                'p_name' => $this->input->post('patient_name'),
+                'patient_id' => $insert_id,
                 'procedures' => $procedures,
                 'doctor_id' => $this->input->post('doctors'),
                 'category_id' => $this->input->post('category'),
                 'schedule_date' => $schedule_date,
                 'description' => $this->input->post('description'),
-                'reg_status_id' => 2,
                 'created' => $now,
                 'modified' => $now
             );
-            $insert = $this->db->insert('patients', $data);
+            $insert = $this->db->insert('appointments', $data);
             if ($insert) {
                 $this->session->set_flashdata('success', 'Appointment Created Successfully.');
             } else {
@@ -262,13 +280,22 @@ class Admin_login extends CI_Controller {
 
     public function getPatients() {
         $term = $this->input->get('p_name');
-        $this->db->select('id as value, CONCAT(p_name, " | ", p_mobile) as label');
+        $this->db->select('id as value, CONCAT(p_name, " || ", p_mobile) as label');
         $this->db->from('patients');
         $this->db->like('p_name', $term, 'after');
         $this->db->or_like('p_mobile', $term, 'after');
         $this->db->limit(100);
         $data = $this->db->get()->result_array();
         echo json_encode($data);
+    }
+
+    public function checkPatient() {
+        $id = $this->input->post('id');
+        $this->db->select('CONCAT(p_name, " || ", p_mobile) as label');
+        $this->db->from('patients');
+        $this->db->where('id', $id);
+        $data = $this->db->get()->row();
+        echo $data->label;
     }
 
 //    public function convert() {

@@ -12,8 +12,10 @@
             .error_frm {font-size: 12px; color: red; display: inline-block;}
             .star {color: red;}
             .select2-container .select2-search--inline .select2-search__field {height: 22px;padding-left: 7px;}
-            .ui-menu .ui-menu-item {padding: 5px 0px; font-size: 12px; font-family: work sans; }
+            .ui-menu .ui-menu-item {font-size: 12px; font-family: work sans; }
+            .ui-menu .ui-menu-item .ui-state-active{border:none !important;background:#efefef; border-bottom: 1px solid #ccc !important; border-top: 1px solid #ccc !important;}
             .ui-menu .ui-menu-item:hover {border:none;}
+            #ui-id-1 { max-height: 150px; overflow-y: scroll; overflow-x: hidden; }
         </style>
     </head>
     <body class="hold-transition skin-blue layout-top-nav">
@@ -48,16 +50,24 @@
                                 <div class="box-body">
                                     <div class="row">
                                         <div class="col-sm-12">
-                                            <div class="col-sm-4">
+                                            <div class="col-sm-3">
                                                 <div class="form-group">
-                                                    <label>Patient Name</label>
+                                                    <label>Patient Name / Phone</label>
                                                     <span class="star">*</span>
-                                                    <input type="text" class="form-control" autocomplete="off" name="patient_name" maxlength="75" value="" id="p_name" placeholder="Enter Patient Name">
-                                                    <input type="hidden" id="hidden_patient" value="">                            
-                                                    <?= form_error('patient_name'); ?>
+                                                    <input type="text" class="form-control" autocomplete="off" name="patient_name" maxlength="75" id="p_name" placeholder="Enter Patient Name / Phone" value="<?= set_value('patient_name') ?>">
+                                                    <input type="hidden" id="hidden_patient" name="hidden_patient" value="<?= set_value('hidden_patient'); ?>">                            
+                                                    <?= ((form_error('patient_name')) ? form_error('patient_name') : form_error('hidden_patient')); ?>
                                                 </div>
                                             </div>
-                                            <div class="col-sm-4">
+                                            <div class="col-sm-3">
+                                                <div class="form-group">
+                                                    <label>Mobile Number</label>
+                                                    <span class="star">*</span>
+                                                    <input type="text" class="form-control" id="mobile" autocomplete="off" maxlength="15" name="mobile" value="<?= set_value('mobile') ?>" placeholder="Enter Mobile Number" onkeypress="return isNumberPress(event)">
+                                                    <?= form_error('mobile'); ?>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-3">
                                                 <div class="form-group">
                                                     <label>Doctors</label>
                                                     <span class="star">*</span>
@@ -70,7 +80,7 @@
                                                     <?= form_error('doctors'); ?>
                                                 </div>
                                             </div>
-                                            <div class="col-sm-4">
+                                            <div class="col-sm-3">
                                                 <div class="form-group">
                                                     <label>Category</label>
                                                     <span class="star">*</span>
@@ -85,18 +95,18 @@
                                             </div>
                                         </div>
                                         <div class="col-md-12">
-                                            <div class="col-sm-4">
+                                            <div class="col-sm-3">
                                                 <div class="form-group">
                                                     <label>Scheduled On</label>
                                                     <span class="star">*</span>
                                                     <div class="input-group date">
                                                         <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
                                                         <input type="text" class="form-control pull-right" data-provide="datepicker" autocomplete="off" id="datepicker" name="schedule_date" value="<?= set_value('schedule_date') ?>" readonly placeholder="Choose Schedule Date">
-                                                        <?= form_error('schedule_date'); ?>
                                                     </div>
+                                                    <?= form_error('schedule_date'); ?>
                                                 </div>
                                             </div>
-                                            <div class="col-md-8">
+                                            <div class="col-md-9">
                                                 <div class="form-group">
                                                     <label>Planned Procedures</label>
                                                     <select class="form-control select2" name="procedures[]" multiple="multiple" data-placeholder="Select a Procedures" style="width: 100%;">
@@ -135,15 +145,20 @@
         <script src="<?= config_item('root_dir'); ?>assets/admin/plugins/iCheck/icheck.min.js"></script>
         <script src="<?= config_item('root_dir'); ?>assets/jquery/jquery-ui.min.js"></script>
         <script>
-            $(function () {
-                $('.select2').select2();
-                $('#datepicker').datepicker({
-                    autoclose: true,
-                    startDate: 'd',
-                    format: 'dd-mm-yyyy',
-                    todayHighlight: true
-                });
-            });
+                                                        $(function () {
+                                                            $('.select2').select2();
+                                                            $('#datepicker').datepicker({
+                                                                autoclose: true,
+                                                                minDate: 'D',
+                                                                showAnim: 'slideDown',
+                                                                changeMonth: true,
+                                                                changeYear: true,
+                                                                setDate: 'D',
+                                                                dateFormat: 'dd-mm-yy',
+                                                                todayHighlight: true
+                                                            });
+                                                            $('#datepicker').datepicker('setDate', 'today');
+                                                        });
         </script>
         <script type="text/javascript">
             function isNumberPress(evt) {
@@ -179,9 +194,27 @@
                     return split(term).pop();
                 }
                 $("#p_name").bind("keydown", function (event) {
+                    var hidename = $("#hidden_patient").val().trim();
+                    if (hidename != '') {
+                        $.ajax({
+                            type: "POST",
+                            url: BASE_URL + "admin_login/checkPatient",
+                            data: 'id=' + hidename,
+                            success: function (msg) {
+                                var name = $("#p_name").val().trim();
+                                if (msg != name) {
+                                    $('#p_name').val('');
+                                    $('#hidden_patient').val('');
+                                    $('#mobile').val('');
+                                    $('#mobile').removeAttr("readonly");
+                                    $('#p_name').focus();
+                                    return false;
+                                }
+                            }
+                        });
+                    }
                     if (event.keyCode === $.ui.keyCode.TAB && $(this).data("autocomplete").menu.active) {
                         event.preventDefault();
-                        alert('hi');
                     }
                 }).autocomplete({
                     source: function (request, response) {
@@ -210,6 +243,10 @@
                         // add placeholder to get the comma-and-space at the end
                         terms.push("");
                         this.value = terms.join("");
+                        var dataa = (ui.item.label).trim();
+                        var intValArray = dataa.split('||');
+                        $('#mobile').val(intValArray[1].trim());
+                        $('#mobile').attr("readonly", "readonly");
                         return false;
                     }
                 });
