@@ -19,7 +19,7 @@ class Booknow extends CI_Controller {
         $this->load->library('form_validation');
         $this->form_validation->set_error_delimiters('<div class="error_frm">', '</div>');
         $this->form_validation->set_rules('name', 'Name', 'trim|required|regex_match[/^([a-zA-Z]|\s)+$/]|min_length[2]|max_length[100]', array('regex_match' => '%s only accepts alphabet.'));
-        $this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email|max_length[100]');
+        $this->form_validation->set_rules('email', 'Email', 'trim|valid_email|max_length[100]');
         $this->form_validation->set_rules('mobile', 'Mobile', 'trim|required|numeric|min_length[7]|max_length[12]');
         $this->form_validation->set_rules('service', 'Service', 'trim|required');
         $this->form_validation->set_rules('date', 'Date', 'trim|required');
@@ -43,19 +43,22 @@ class Booknow extends CI_Controller {
             $status = json_decode($response, true);
             if (empty($status['success'])) {
                 $date_val = date('Y-m-d', strtotime($this->input->post('date')));
+                $phone = trim($this->input->post('mobile'));
+                $check_patient = $this->my_model->check_patient($phone);
+                $is_patient = (($check_patient > 0) ? 1 : 0);
                 $data = array(
-                    'service_id' => trim($this->input->post('service')),
-                    'best_date' => $date_val,
-                    'p_name' => trim($this->input->post('name')),
+                    'service' => trim($this->input->post('service')),
+                    'date' => $date_val,
+                    'name' => trim($this->input->post('name')),
                     'email' => trim($this->input->post('email')),
-                    'p_mobile' => trim($this->input->post('mobile')),
-                    'best_time' => trim($this->input->post('time')),
-                    'is_new_patient' => trim(($this->input->post('patient_type'))),
-                    'reg_status_id' => 3,
+                    'mobile' => $phone,
+                    'time' => trim($this->input->post('time')),
+                    'patient_type' => trim(($this->input->post('patient_type'))),
+                    'is_patient' => $is_patient,
                     'created' => $now,
                     'modified' => $now
                 );
-                $result = $this->db->insert("patients", $data);
+                $result = $this->db->insert("tbl_contacted", $data);
                 if ($result) {
                     $assigned_message = "Hi, Someone is Contacted Through Peoplesdentalcare... Here are the details. Name: " . $this->input->post('name') . " , Email:  " . $this->input->post('email') . ", Mobile:  " . $this->input->post('mobile') . " , Date:  " . $this->input->post('date') . ", Time:  " . $this->input->post('time') . " , Service Type:  " . $this->input->post('service') . " , New Patient:  " . $this->input->post('patient_type') . " .Thank You ...!";
                     //$this->sms("8143011112", $assigned_message);

@@ -28,4 +28,12 @@ class Booknow_model extends CI_Model {
         return $this->db->get('book_services')->result();
     }
 
+    public function check_patient($phone) {
+        $this->db->select('count(*) as patnt');
+        $this->db->from('patients');
+        $this->db->where('p_mobile', $phone);
+        $data = $this->db->get()->row();
+        return $data->patnt;
+    }
+
 }

@@ -9,6 +9,7 @@
             .profile_list img { border: 1px solid #eee; height: 139px;}
             .icon_crud a {padding: 0px 5px;}
             .pagination {margin: 0 0 15px 0;}
+            .search_bar {padding-bottom: 10px;}
         </style>
     </head>
     <body class="hold-transition skin-blue layout-top-nav">
@@ -40,16 +41,6 @@
                                         </div>
                                     </div>
                                     <div class="col-md-3 col-sm-4">
-                                        <div class="form-group">
-                                            <select class="form-control" name="reg">
-                                                <option value="" <?= (($reg == "") ? "selected" : ""); ?>> -- Search by Register Type -- </option>
-                                                <option value="1" <?= (($reg == "1") ? "selected" : ""); ?>>Patient</option>
-                                                <option value="2" <?= (($reg == "2") ? "selected" : ""); ?>>Appointment</option>
-                                                <option value="3" <?= (($reg == "3") ? "selected" : ""); ?>>Contact Us</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3 col-sm-4">
                                         <button type="submit" class="btn btn-primary">Submit</button>
                                         <a href="<?= base_url('admin_login/patient_list'); ?>" class="btn btn-default">Clear</a>
                                     </div>
@@ -75,7 +66,6 @@
                                                     </select>
                                                     <input type="hidden" name="name" value="<?= $name; ?>">
                                                     <input type="hidden" name="email" value="<?= $email; ?>">
-                                                    <input type="hidden" name="reg" value="<?= $reg; ?>">
                                                     <input type="hidden" name="phone" value="<?= $phone; ?>">
                                                 </form>
                                             </span>
@@ -90,20 +80,30 @@
                         <div class="box">
                             <div class="box-body">
                                 <div class="patients">
-                                    <?php foreach ($patients as $patient) { ?>
-                                        <div class="col-md-2">
-                                            <div class="profile_list">
-                                                <img src="<?= (($patient->profile) ? config_item('root_dir') . "assets/profile_pictures/" . $patient->profile : config_item('root_dir') . "assets/images/profile.png") ?>" width="100%" height="auto" />
-                                                <p class="text-center profile_name">
-                                                    <?= $patient->p_name; ?><br/>
-                                                    <span>Ph : <?= $patient->p_mobile; ?></span>
-                                                </p>
-                                                <p class="text-center icon_crud" style="margin: 7px 7px 2px 7px;">
-                                                    <a href="<?= base_url('admin_login/viewPatient/' . $patient->id); ?>" class="btn btn-warning" title="View Patient"><i class="fa fa-eye"></i></a>
-                                                    <a href="<?= base_url('admin_login/editPatient/' . $patient->id); ?>" class="btn btn-info" title="Edit Patient"><i class="fa fa-edit"></i></a>
-                                                    <a href="#" class="btn btn-danger" title="Delete Patient"><i class="fa fa-trash"></i></a>
-                                                </p>
+                                    <?php
+                                    if ($patients) {
+                                        foreach ($patients as $patient) {
+                                            ?>
+                                            <div class="col-md-2">
+                                                <div class="profile_list">
+                                                    <img src="<?= (($patient->profile) ? config_item('root_dir') . "assets/profile_pictures/" . $patient->profile : config_item('root_dir') . "assets/images/profile.png") ?>" width="100%" height="auto" />
+                                                    <p class="text-center profile_name">
+                                                        <?= $patient->p_name; ?><br/>
+                                                        <span>Ph : <?= $patient->p_mobile; ?></span>
+                                                    </p>
+                                                    <p class="text-center icon_crud" style="margin: 7px 7px 2px 7px;">
+                                                        <a href="<?= base_url('admin_login/viewPatient/' . $patient->id); ?>" class="btn btn-warning" title="View Patient"><i class="fa fa-eye"></i></a>
+                                                        <a href="<?= base_url('admin_login/editPatient/' . $patient->id); ?>" class="btn btn-info" title="Edit Patient"><i class="fa fa-edit"></i></a>
+                                                        <a href="#" class="btn btn-danger" title="Delete Patient"><i class="fa fa-trash"></i></a>
+                                                    </p>
+                                                </div>
                                             </div>
+                                            <?php
+                                        }
+                                    } else {
+                                        ?>
+                                        <div class="col-md-12">
+                                            <h4 class="text-center"> -- &nbsp;&nbsp;No Patient Added Yet&nbsp;&nbsp; -- </h4>
                                         </div>
                                     <?php } ?>
                                 </div>

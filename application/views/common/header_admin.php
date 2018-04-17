@@ -26,7 +26,7 @@
                             <li><a href="<?= base_url('patient_medical_records'); ?>">Medical Records</a></li>
                         </ul>
                     </li>
-                    <li><a href="<?= base_url('appointment_members'); ?>">Appointments</a></li>
+                    <li><a href="<?= base_url('contact_us'); ?>">Contact Us</a></li>
                     <li><a href="<?= base_url('reports'); ?>">Reports</a></li>
                     <li><a href="<?= base_url('back_office'); ?>">Back Office</a></li>
                     <li><a href="<?= base_url('cms'); ?>">CMS</a></li>

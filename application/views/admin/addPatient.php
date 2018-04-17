@@ -62,7 +62,6 @@
                                             <div class="col-sm-4">
                                                 <div class="form-group">
                                                     <label>Gender</label>
-                                                    <span class="star">*</span>
                                                     <select class="form-control" name="gender">
                                                         <option value="" <?= set_select('gender', "", TRUE) ?>> -- Select Gender -- </option>
                                                         <option value="Male" <?= set_select('gender', "Male") ?>>Male</option>
@@ -76,7 +75,6 @@
                                             <div class="col-sm-4">
                                                 <div class="form-group">
                                                     <label>Patient Age</label>
-                                                    <span class="star">*</span>
                                                     <input type="text" class="form-control" id="age" autocomplete="off" name="age" maxlength="3" value="<?= set_value('age') ?>" onkeypress="return isNumberPress(event)" placeholder="Enter Patient Age">
                                                     <?= form_error('age'); ?>
                                                 </div>

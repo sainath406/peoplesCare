@@ -26,15 +26,19 @@ class Login_model extends CI_Model {
     function getMembers($search) {
         $name = $search['name'];
         $email = $search['email'];
+        $phone = $search['phone'];
         $start = $search['start'];
         $limit = $search['limit'];
         $this->db->select('*');
         $this->db->from('tbl_contacted');
         if ($name) {
-            $this->db->like('name', $name);
+            $this->db->like('name', $name, 'after');
         }
         if ($email) {
-            $this->db->like('email', $email);
+            $this->db->like('email', $email, 'after');
+        }
+        if ($phone) {
+            $this->db->like('mobile', $phone, 'after');
         }
         $this->db->order_by('id', 'DESC');
         $this->db->limit($limit, $start);
@@ -46,13 +50,17 @@ class Login_model extends CI_Model {
     function getMembersCount($search) {
         $name = $search['name'];
         $email = $search['email'];
+        $phone = $search['phone'];
         $this->db->select('count(*) as ttl_rows');
         $this->db->from('tbl_contacted');
         if ($name) {
-            $this->db->like('name', $name);
+            $this->db->like('name', $name, 'after');
         }
         if ($email) {
-            $this->db->like('email', $email);
+            $this->db->like('email', $email, 'after');
+        }
+        if ($phone) {
+            $this->db->like('mobile', $phone, 'after');
         }
         $count = $this->db->get()->row();
         return $count->ttl_rows;

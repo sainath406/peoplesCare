@@ -5,12 +5,15 @@
         <?php $this->load->view('common/head_admin'); ?>
         <link rel="stylesheet" href="<?= config_item('root_dir'); ?>assets/admin/components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
         <link rel="stylesheet" href="<?= config_item('root_dir'); ?>assets/admin/plugins/iCheck/all.css">
+        <link rel="stylesheet" href="<?= config_item('root_dir'); ?>assets/jquery/jquery-ui.css">
         <style>
             .select2 {font-size: 12px;}
             hr {margin-bottom: 10px; margin-top: 10px;}
             .error_frm {font-size: 12px; color: red; display: inline-block;}
             .star {color: red;}
             .select2-container .select2-search--inline .select2-search__field {height: 22px;padding-left: 7px;}
+            .ui-menu .ui-menu-item {padding: 5px 0px; font-size: 12px; font-family: work sans; }
+            .ui-menu .ui-menu-item:hover {border:none;}
         </style>
     </head>
     <body class="hold-transition skin-blue layout-top-nav">
@@ -49,32 +52,9 @@
                                                 <div class="form-group">
                                                     <label>Patient Name</label>
                                                     <span class="star">*</span>
-                                                    <input type="text" class="form-control" autocomplete="off" id="patient_name" name="patient_name" maxlength="75" value="<?= set_value('patient_name') ?>" onkeypress="return allowalphaspace(event)" placeholder="Enter Patient Name">
+                                                    <input type="text" class="form-control" autocomplete="off" name="patient_name" maxlength="75" value="" id="p_name" placeholder="Enter Patient Name">
+                                                    <input type="hidden" id="hidden_patient" value="">                            
                                                     <?= form_error('patient_name'); ?>
-                                                </div>
-                                            </div>  
-                                            <div class="col-sm-4">
-                                                <div class="form-group">
-                                                    <label>Patient ID</label>
-                                                    <input type="text" class="form-control" id="patient_id" autocomplete="off" maxlength="50" name="patient_id" value="<?= set_value('patient_id') ?>" placeholder="Enter Patient Id">
-                                                    <?= form_error('patient_id'); ?>
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-4">
-                                                <div class="form-group">
-                                                    <label>Mobile Number</label>
-                                                    <span class="star">*</span>
-                                                    <input type="text" class="form-control" id="mobile" autocomplete="off" maxlength="15" name="mobile" value="<?= set_value('mobile') ?>" placeholder="Enter Mobile Number" onkeypress="return isNumberPress(event)">
-                                                    <?= form_error('mobile'); ?>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-12">
-                                            <div class="col-sm-4">
-                                                <div class="form-group">
-                                                    <label>Email</label>
-                                                    <input type="text" class="form-control" id="email" autocomplete="off" name="email" maxlength="75" value="<?= set_value('email') ?>" placeholder="Enter Email">
-                                                    <?= form_error('email'); ?>
                                                 </div>
                                             </div>
                                             <div class="col-sm-4">
@@ -153,16 +133,17 @@
         <script src="<?= config_item('root_dir'); ?>assets/admin/components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
         <script src="<?= config_item('root_dir'); ?>assets/admin/components/select2/dist/js/select2.full.min.js"></script>
         <script src="<?= config_item('root_dir'); ?>assets/admin/plugins/iCheck/icheck.min.js"></script>
+        <script src="<?= config_item('root_dir'); ?>assets/jquery/jquery-ui.min.js"></script>
         <script>
-                                                        $(function () {
-                                                            $('.select2').select2();
-                                                            $('#datepicker').datepicker({
-                                                                autoclose: true,
-                                                                startDate: 'd',
-                                                                format: 'dd-mm-yyyy',
-                                                                todayHighlight: true
-                                                            });
-                                                        });
+            $(function () {
+                $('.select2').select2();
+                $('#datepicker').datepicker({
+                    autoclose: true,
+                    startDate: 'd',
+                    format: 'dd-mm-yyyy',
+                    todayHighlight: true
+                });
+            });
         </script>
         <script type="text/javascript">
             function isNumberPress(evt) {
@@ -187,6 +168,52 @@
                     event.preventDefault();
                 }
             }
+        </script>
+        <script>
+            $(document).ready(function () {
+                var BASE_URL = '<?= base_url(); ?>';
+                function split(val) {
+                    return val.split(/,\s*/);
+                }
+                function extractLast(term) {
+                    return split(term).pop();
+                }
+                $("#p_name").bind("keydown", function (event) {
+                    if (event.keyCode === $.ui.keyCode.TAB && $(this).data("autocomplete").menu.active) {
+                        event.preventDefault();
+                        alert('hi');
+                    }
+                }).autocomplete({
+                    source: function (request, response) {
+                        $.getJSON(BASE_URL + "admin_login/getPatients", {
+                            p_name: extractLast(request.term)
+                        }, response);
+                    },
+                    search: function () {
+                        // custom minLength
+                        var term = extractLast(this.value);
+                        if (term.length < 1) {
+                            return false;
+                        }
+                    },
+                    focus: function () {
+                        // prevent value inserted on focus
+                        return false;
+                    },
+                    select: function (event, ui) {
+                        var terms = split(this.value);
+                        // remove the current input
+                        terms.pop();
+                        $("#hidden_patient").val(ui.item.value);
+                        // add the selected item
+                        terms.push(ui.item.label);
+                        // add placeholder to get the comma-and-space at the end
+                        terms.push("");
+                        this.value = terms.join("");
+                        return false;
+                    }
+                });
+            });
         </script>
     </body>
 </html>

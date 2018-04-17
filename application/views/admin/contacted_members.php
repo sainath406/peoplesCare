@@ -2,6 +2,12 @@
 <html>
     <head>
         <?php $this->load->view('common/head_admin'); ?>
+        <style>
+            .search_bar {padding-bottom: 10px;}
+            .pagination {margin-top: 0; margin-bottom: 10px;}
+            .warning-table table th{background: #f39c12; background-color: #f39c12;}
+            .icon_crud a {padding: 0px 5px;}
+        </style>
     </head>
     <body class="hold-transition skin-blue layout-top-nav">
         <?php $this->load->view('common/header_admin'); ?>
@@ -26,14 +32,19 @@
                                     </div>
                                 </div>
                                 <div class="col-md-3 col-sm-4">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" name="phone" autocomplete="off" id="phone" placeholder="Search by Phone" value="<?= $phone; ?>">
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-sm-4">
                                     <button type="submit" class="btn btn-primary">Submit</button>
-                                    <a href="<?= base_url('appointment_members'); ?>" class="btn btn-default">Clear</a>
+                                    <a href="<?= base_url('contact_us'); ?>" class="btn btn-default">Clear</a>
                                 </div>
                             </div>
                         </form>
                     </div>
                     <div class="box">
-                        <div class="row" style="padding: 10px 10px 0px 10px;">
+                        <div class="row" style="padding: 15px 25px 10px 25px;">
                             <div class="col-md-2">
                                 <span>
                                     <form role="form" class="form-horizontal" action="<?= base_url('admin_login/contacted_members' . $querystring); ?>" method="get">
@@ -55,57 +66,56 @@
                             </div>
                         </div>
                         <div class="box-body">
-                            <table id="example1" class="table table-bordered">
-                                <thead>
-                                    <tr>
-                                        <th>Name</th>
-                                        <th>Email</th>
-                                        <th>Mobile</th>
-                                        <th>Service</th>
-                                        <th>Best Date</th>
-                                        <th>Call Timings</th>
-                                        <th>New Patient?</th>
-                                        <th>Created</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php
-                                    if ($members) {
-                                        foreach ($members as $member) {
+                            <div style="padding: 0px 15px 0px 15px;">
+                                <table id="example1" class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>Mobile</th>
+                                            <th>Best Date</th>
+                                            <th>Call Timings</th>
+                                            <th>Created</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php
+                                        if ($members) {
+                                            foreach ($members as $member) {
+                                                ?>
+                                                <tr>
+                                                    <td><?= $member->name; ?></td>
+                                                    <td class="text-right"><?= $member->mobile; ?></td>
+                                                    <td class="text-center"><?= date('M d, Y (D)', strtotime($member->date)); ?></td>
+                                                    <td><?= $member->time; ?></td>
+                                                    <td class="text-center"><?= date('d-m-Y', strtotime($member->created)); ?></td>
+                                                    <td class="icon_crud text-center">
+                                                        <a href="<?= base_url(); ?>" class="btn btn-primary" title="View Patient"><i class="fa fa-eye"></i></a>
+                                                        <a href="#" class="btn btn-danger" title="Delete Patient"><i class="fa fa-trash"></i></a>
+                                                    </td>
+                                                </tr>
+                                                <?php
+                                            }
+                                        } else {
                                             ?>
                                             <tr>
-                                                <td><?= $member->name; ?></td>
-                                                <td><?= $member->email; ?></td>
-                                                <td><?= $member->mobile; ?></td>
-                                                <td><?= $member->service; ?></td>
-                                                <td><?= date('d D, M Y', strtotime($member->date)); ?></td>
-                                                <td><?= $member->time; ?></td>
-                                                <td><?= $member->patient_type; ?></td>
-                                                <td><?= date('d-m-Y', strtotime($member->created)); ?></td>
+                                                <td colspan="7"><p class="text-center" style="margin: 10px;">No Data Available </p></td>
                                             </tr>
-                                            <?php
-                                        }
-                                    } else {
-                                        ?>
+                                        <?php } ?>
+                                    </tbody>
+                                    <tfoot>
                                         <tr>
-                                            <td colspan="7"><p class="text-center" style="margin: 10px;">No Data Available </p></td>
+                                            <th>Name</th>
+                                            <th>Mobile</th>
+                                            <th>Best Date</th>
+                                            <th>Call Timings</th>
+                                            <th>Created</th>
+                                            <th>Action</th>
                                         </tr>
-                                    <?php } ?>
-                                </tbody>
-                                <tfoot>
-                                    <tr>
-                                        <th>Name</th>
-                                        <th>Email</th>
-                                        <th>Mobile</th>
-                                        <th>Service</th>
-                                        <th>Best Date</th>
-                                        <th>Call Timings</th>
-                                        <th>Patient Type</th>
-                                        <th>Created</th>
-                                    </tr>
-                                </tfoot>
-                            </table>
-                            <?= $pagination; ?>
+                                    </tfoot>
+                                </table>
+                                <?= $pagination; ?>
+                            </div>
                         </div>
                     </div>
                 </div>

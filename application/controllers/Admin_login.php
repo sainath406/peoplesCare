@@ -23,12 +23,13 @@ class Admin_login extends CI_Controller {
         $data['starting'] = ($this->input->get('page')) ? ($data['start'] - 1 ) * $data['limit'] : 0;
         $data['name'] = ($this->input->get('name')) ? $this->input->get('name') : '';
         $data['email'] = ($this->input->get('email')) ? $this->input->get('email') : '';
-
+        $data['phone'] = ($this->input->get('phone')) ? $this->input->get('phone') : '';
         $search_options = array(
             'start' => $data['starting'],
             'limit' => $data['limit'],
             'name' => $data['name'],
-            'email' => $data['email']
+            'email' => $data['email'],
+            'phone' => $data['phone']
         );
         $this->load->model('admin/login_model');
         $members = $this->login_model->getMembers($search_options);
@@ -96,7 +97,7 @@ class Admin_login extends CI_Controller {
         $this->form_validation->set_error_delimiters('<div class="error_frm">', '</div>');
         $this->form_validation->set_rules('patient_name', 'Name', 'trim|required|regex_match[/^([a-zA-Z]|\s)+$/]|min_length[2]|max_length[100]', array('regex_match' => '%s only accepts alphabet.'));
         $this->form_validation->set_rules('patient_id', 'Patient Id', 'trim|max_length[50]');
-        $this->form_validation->set_rules('gender', 'Gender', 'trim|required');
+        $this->form_validation->set_rules('gender', 'Gender');
         $this->form_validation->set_rules('dob', 'Date Of Birth');
         $this->form_validation->set_rules('reference', 'Referred By');
         $this->form_validation->set_rules('blood', 'Blood Group');
@@ -107,24 +108,21 @@ class Admin_login extends CI_Controller {
         $this->form_validation->set_rules('city', 'City');
         $this->form_validation->set_rules('pincode', 'Pincode');
         $this->form_validation->set_rules('email', 'Email', 'trim|valid_email|max_length[100]');
-        $this->form_validation->set_rules('p_mobile', 'Primary Mobile', 'trim|required|numeric|min_length[7]|max_length[12]');
-        $this->form_validation->set_rules('s_mobile', 'Secondary Mobile', 'trim|numeric|min_length[7]|max_length[12]');
-        $this->form_validation->set_rules('age', 'Age', 'trim|required|numeric|max_length[3]');
+        $this->form_validation->set_rules('p_mobile', 'Primary Mobile', 'trim|required|numeric|min_length[7]|max_length[12]|is_unique[patients.p_mobile]', array('is_unique' => 'Patient Already Exist'));
+        $this->form_validation->set_rules('s_mobile', 'Secondary Mobile', 'trim|numeric|min_length[7]|max_length[12]|is_unique[patients.p_mobile]', array('is_unique' => 'Patient Already Exist'));
+        $this->form_validation->set_rules('age', 'Age', 'trim|numeric|max_length[3]');
         if ($this->form_validation->run() == FALSE) {
             $this->load->view('admin/addPatient', $data);
         } else {
             $this->load->model('common/upload_model');
             $profile = 'profile';
             $y = $_FILES[$profile]['name'];
+            $profile_picture = '';
             if ($y != '') {
                 $file_upl_data = $this->upload_model->uploadDocuments($profile, 'Profile');
                 if ($file_upl_data['success'] == 1) {
                     $profile_picture = $file_upl_data['file_name'];
-                } else {
-                    $profile_picture = '';
                 }
-            } else {
-                $profile_picture = '';
             }
 
             $now = date('Y-m-d H:i:s', strtotime('now'));
@@ -146,7 +144,6 @@ class Admin_login extends CI_Controller {
                 'locality' => $this->input->post('locality'),
                 'city' => $this->input->post('city'),
                 'pincode' => $this->input->post('pincode'),
-                'reg_status_id' => 1,
                 'created' => $now,
                 'modified' => $now
             );
@@ -190,9 +187,6 @@ class Admin_login extends CI_Controller {
         $this->load->library('form_validation');
         $this->form_validation->set_error_delimiters('<div class="error_frm">', '</div>');
         $this->form_validation->set_rules('patient_name', 'Name', 'trim|required|regex_match[/^([a-zA-Z]|\s)+$/]|min_length[2]|max_length[100]', array('regex_match' => '%s only accepts alphabet.'));
-        $this->form_validation->set_rules('patient_id', 'Patient Id', 'trim|max_length[50]');
-        $this->form_validation->set_rules('email', 'Email', 'trim|valid_email|max_length[100]');
-        $this->form_validation->set_rules('mobile', 'Mobile', 'trim|required|numeric|min_length[7]|max_length[12]');
         $this->form_validation->set_rules('procedures[]', 'Procedures');
         $this->form_validation->set_rules('doctors', 'Doctor', 'trim|required');
         $this->form_validation->set_rules('category', 'Category', 'trim|required');
@@ -210,9 +204,6 @@ class Admin_login extends CI_Controller {
             $schedule_date = date('Y-m-d', strtotime($this->input->post('schedule_date')));
             $data = array(
                 'p_name' => $this->input->post('patient_name'),
-                'p_id' => $this->input->post('patient_id'),
-                'email' => $this->input->post('email'),
-                'p_mobile' => $this->input->post('mobile'),
                 'procedures' => $procedures,
                 'doctor_id' => $this->input->post('doctors'),
                 'category_id' => $this->input->post('category'),
@@ -240,14 +231,12 @@ class Admin_login extends CI_Controller {
         $data['name'] = ($this->input->get('name')) ? $this->input->get('name') : '';
         $data['email'] = ($this->input->get('email')) ? $this->input->get('email') : '';
         $data['phone'] = ($this->input->get('phone')) ? $this->input->get('phone') : '';
-        $data['reg'] = ($this->input->get('reg')) ? $this->input->get('reg') : '';
         $search_options = array(
             'start' => $data['starting'],
             'limit' => $data['limit'],
             'name' => $data['name'],
             'email' => $data['email'],
-            'phone' => $data['phone'],
-            'reg' => $data['reg']
+            'phone' => $data['phone']
         );
         $this->load->model('admin/patient_model');
         $patients = $this->patient_model->getPatients($search_options);
@@ -269,6 +258,17 @@ class Admin_login extends CI_Controller {
         $data['pagination'] = $this->pagination->create_links();
         $data['querystring'] = $QUERY_STRING;
         $this->load->view('admin/patient_list', $data);
+    }
+
+    public function getPatients() {
+        $term = $this->input->get('p_name');
+        $this->db->select('id as value, CONCAT(p_name, " | ", p_mobile) as label');
+        $this->db->from('patients');
+        $this->db->like('p_name', $term, 'after');
+        $this->db->or_like('p_mobile', $term, 'after');
+        $this->db->limit(100);
+        $data = $this->db->get()->result_array();
+        echo json_encode($data);
     }
 
 //    public function convert() {

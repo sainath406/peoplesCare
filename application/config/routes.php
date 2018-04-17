@@ -53,7 +53,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $route['default_controller'] = 'home';
 
 #admin routes start
-$route['appointment_members'] = 'admin_login/contacted_members';
+$route['contact_us'] = 'admin_login/contacted_members';
 
 
 $route['404_override'] = '';

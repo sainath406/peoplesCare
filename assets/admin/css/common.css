@@ -48,15 +48,23 @@ body {
     text-align: center;
     font-family: raleway;
     letter-spacing: 1px;
-    background: #ecf0f59e;
+    background: #f39c12;
+    color: #FFF;
 }
 
 #example1 td {
     font-size: 13px;
 }
 
-#example1 table, #example1 th, #example1 td {
-    border: 1px solid #ddd;
+#example1 th, #example1 td {
+    border: 1px solid #f39c123b;
+}
+
+.right-bor {border-right: 1px solid #f39c12 !important;}
+.left-bor {border-left: 1px solid #f39c12 !important;}
+
+#example1 {
+    border: 1px solid #f39c12;
 }
 
 .middle-heading {

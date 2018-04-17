@@ -63,7 +63,6 @@
                                                 <div class="col-md-4">
                                                     <div class="form-group">
                                                         <label class="menu-text">EMAIL</label>
-                                                        <span class="star">*</span>
                                                         <input type="text" class="form-control" name="email" placeholder="E-mail" value="<?= set_value('email') ?>">
                                                         <?= form_error('email'); ?>
                                                     </div>

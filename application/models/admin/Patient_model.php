@@ -38,7 +38,6 @@ class Patient_model extends CI_Model {
         $name = $search['name'];
         $email = $search['email'];
         $phone = $search['phone'];
-        $reg = $search['reg'];
         $start = $search['start'];
         $limit = $search['limit'];
         $this->db->select('id, p_name, profile, p_mobile');
@@ -52,9 +51,6 @@ class Patient_model extends CI_Model {
         if ($phone) {
             $this->db->like('p_mobile', $phone, 'after');
         }
-        if ($reg) {
-            $this->db->where('reg_status_id', $reg);
-        }
         $this->db->order_by('id', 'DESC');
         $this->db->limit($limit, $start);
         $data['patients'] = $this->db->get()->result();
@@ -66,7 +62,6 @@ class Patient_model extends CI_Model {
         $name = $search['name'];
         $email = $search['email'];
         $phone = $search['phone'];
-        $reg = $search['reg'];
         $start = $search['start'];
         $limit = $search['limit'];
         $this->db->select('count(*) as ttl_rows');
@@ -79,9 +74,6 @@ class Patient_model extends CI_Model {
         }
         if ($phone) {
             $this->db->like('p_mobile', $phone, 'after');
-        }
-        if ($reg) {
-            $this->db->where('reg_status_id', $reg);
         }
         $count = $this->db->get()->row();
         return $count->ttl_rows;
