@@ -14,35 +14,6 @@
         })
     });
 </script>
-<script>
-    $(function () {
-        // We can attach the `fileselect` event to all file inputs on the page
-        $(document).on('change', ':file', function () {
-            var input = $(this),
-                    numFiles = input.get(0).files ? input.get(0).files.length : 1,
-                    label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
-            input.trigger('fileselect', [numFiles, label]);
-        });
-
-        // We can watch for our custom `fileselect` event like this
-        $(document).ready(function () {
-            $(':file').on('fileselect', function (event, numFiles, label) {
-
-                var input = $(this).parents('.input-group').find(':text'),
-                        log = numFiles > 1 ? numFiles + ' files selected' : label;
-
-                if (input.length) {
-                    input.val(log);
-                } else {
-                    if (log)
-                        alert(log);
-                }
-
-            });
-        });
-
-    });
-</script>
 <script type="text/javascript">
     function isNumberPress(evt) {
         evt = (evt) ? evt : window.event;
@@ -71,4 +42,75 @@
             event.preventDefault();
         }
     }
+</script>
+<script>
+    $(document).ready(function () {
+        $("#med_plus").click(function () {
+            $(".med_add_class").slideToggle('medium');
+        });
+
+        $("#groups_plus").click(function () {
+            $(".grp_add_class").slideToggle('medium');
+        });
+
+        $("#submit_med").click(function () {
+            var item = $("#med_add").val();
+            if (item.length == '') {
+                $(".error_med").text('');
+                $(".error_med").text('Item is Required');
+                $(".error_med").show();
+                $("#med_add").focus();
+                return false;
+            } else {
+                $(".error_med").hide();
+                $("#submit_med").text('Processing..');
+                $("#submit_med").attr('disabled', 'disabled');
+                $.ajax({
+                    type: "POST",
+                    url: "<?= base_url(); ?>admin_login/addMedicalHystory",
+                    data: 'item=' + item,
+                    success: function (msg) {
+                        $("#submit_med").text('Add Item');
+                        $("#submit_med").removeAttr('disabled');
+                        $(".med_add_class").hide();
+                        if (msg != '') {
+                            $("#each_med").html(msg);
+                        } else {
+                            alert('Item Not Added, Try again later.');
+                        }
+                    }
+                });
+            }
+        });
+
+        $("#submit_grp").click(function () {
+            var item = $("#grp_add").val();
+            if (item.length == '') {
+                $(".error_grp").text('');
+                $(".error_grp").text('Item is Required');
+                $(".error_grp").show();
+                $("#grp_add").focus();
+                return false;
+            } else {
+                $(".error_grp").hide();
+                $("#submit_grp").text('Processing..');
+                $("#submit_grp").attr('disabled', 'disabled');
+                $.ajax({
+                    type: "POST",
+                    url: "<?= base_url(); ?>admin_login/addGroups",
+                    data: 'item=' + item,
+                    success: function (msg) {
+                        $("#submit_grp").text('Add Item');
+                        $("#submit_grp").removeAttr('disabled');
+                        $(".grp_add_class").hide();
+                        if (msg != '') {
+                            $("#each_grp").html(msg);
+                        } else {
+                            alert('Item Not Added, Try again later.');
+                        }
+                    }
+                });
+            }
+        });
+    });
 </script>

@@ -3,15 +3,15 @@
 class Patient_model extends CI_Model {
 
     public function getMedicalHistory() {
-        return $this->db->get('medical_history')->result();
+        return $this->db->where('status', 1)->order_by('id', 'DESC')->get('medical_history')->result();
     }
 
     public function getGroups() {
-        return $this->db->get('groups')->result();
+        return $this->db->where('status', 1)->order_by('id', 'DESC')->get('groups')->result();
     }
 
     public function getReferredBy() {
-        return $this->db->get('referred_by')->result();
+        return $this->db->where('status', 1)->get('referred_by')->result();
     }
 
     public function getBloodGroups() {
@@ -23,15 +23,15 @@ class Patient_model extends CI_Model {
     }
 
     public function getDoctors() {
-        return $this->db->get('doctors')->result();
+        return $this->db->where('status', 1)->get('doctors')->result();
     }
 
     public function getCategories() {
-        return $this->db->get('categories')->result();
+        return $this->db->where('status', 1)->get('categories')->result();
     }
 
     public function getProcedures() {
-        return $this->db->get('procedures')->result();
+        return $this->db->where('status', 1)->get('procedures')->result();
     }
 
     function getPatients($search) {

@@ -298,30 +298,42 @@ class Admin_login extends CI_Controller {
         echo $data->label;
     }
 
-//    public function convert() {
-//        $data = "English,
-//            Hindi,
-//            Telugu,
-//            Marathi,
-//            Gujarati,
-//            Tamil,
-//            Malayalam,
-//            Bengali,
-//            Punjabi,
-//            Kannada,
-//            Assamese,
-//            Odia";
-//        $data1 = explode(",", $data);
-//        $now = date('Y-m-d H:i:s', strtotime('now'));
-//        foreach ($data1 as $da) {
-//            $data2 = array(
-//                'language' => trim($da),
-//                'created' => $now
-//            );
-//            $insert = $this->db->insert('languages', $data2);
-//            if ($insert) {
-//                echo '<pre> Success';
-//            }
-//        }
-//    }
+    public function addMedicalHystory() {
+        $item = trim($this->input->post('item'));
+        $now = date('Y-m-d H:i:s', strtotime('now'));
+        $data = array(
+            'med_his' => $item,
+            'created' => $now,
+            'modified' => $now
+        );
+        $insert = $this->db->insert('medical_history', $data);
+        $sendData = '';
+        if ($insert) {
+            $meds = $data['med_his'] = $this->patient_model->getMedicalHistory();
+            foreach ($meds as $med) {
+                $sendData .= '<label class=""><div class="icheckbox_minimal-blue" aria-checked="false" aria-disabled="false" style="position: relative;"><input type="checkbox" name="med_his[]" value="' . $med->id . '" class="minimal" style="position: absolute; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins></div>&nbsp;&nbsp;' . $med->med_his . '</label><hr>';
+            }
+        }
+        echo $sendData;
+    }
+
+    public function addGroups() {
+        $item = trim($this->input->post('item'));
+        $now = date('Y-m-d H:i:s', strtotime('now'));
+        $data = array(
+            'group_name' => $item,
+            'created' => $now,
+            'modified' => $now
+        );
+        $insert = $this->db->insert('groups', $data);
+        $sendData = '';
+        if ($insert) {
+            $groups = $this->patient_model->getGroups();
+            foreach ($groups as $group) {
+                $sendData .= '<label><div class="icheckbox_minimal-blue" aria-checked="false" aria-disabled="false" style="position: relative;"><input type="checkbox" name="groups[]" value="' . $group->id . '" class="minimal" style="position: absolute; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins></div>&nbsp;&nbsp;' . $group->group_name . '</label><hr>';
+            }
+        }
+        echo $sendData;
+    }
+
 }

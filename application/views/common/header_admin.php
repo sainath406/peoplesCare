@@ -17,13 +17,6 @@
                             <li><a href="<?= base_url('admin_login/addPatient'); ?>">Add Patient</a></li>
                             <li><a href="<?= base_url('admin_login/addAppointment'); ?>">Add Appointment</a></li> 
                             <li><a href="<?= base_url('admin_login/patient_list'); ?>">Patients List</a></li> 
-                            <li><a href="<?= base_url('patient_vital_signs'); ?>">Vital Signs</a></li>
-                            <li><a href="<?= base_url('patient_clinical_notes'); ?>">Clinical Notes</a></li>
-                            <li><a href="<?= base_url('patient_treatment_plans'); ?>">Treatment Plans</a></li>
-                            <li><a href="<?= base_url('patient_completed_procedures'); ?>">Completed Procedures</a></li>
-                            <li><a href="<?= base_url('patient_prescription'); ?>">Prescription</a></li>
-                            <li><a href="<?= base_url('patient_invoice'); ?>">Invoice</a></li>
-                            <li><a href="<?= base_url('patient_medical_records'); ?>">Medical Records</a></li>
                         </ul>
                     </li>
                     <li><a href="<?= base_url('contact_us'); ?>">Contact Us</a></li>
