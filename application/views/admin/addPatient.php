@@ -7,7 +7,7 @@
         <link rel="stylesheet" href="<?= config_item('root_dir'); ?>assets/admin/plugins/iCheck/all.css">
         <style>
             .select2 {font-size: 12px;}
-            hr {margin-bottom: 10px; margin-top: 10px;}
+            hr {margin-bottom: 8px; margin-top: 8px;}
             .error_frm {font-size: 12px; color: red; display: inline-block;}
             .star {color: red;}
             #profile {overflow: hidden;text-overflow: ellipsis;white-space: nowrap;border: none;padding-left: 0;padding-top: 0;}
@@ -15,6 +15,8 @@
             .med_add_class { padding: 10px 0; display: none;}
             .grp_add_class { padding: 10px 0; display: none;}
             .btn-box-tool {padding: 5px 10px;}
+            .wishes .btn-default.active {color: #fff;background: #f39c12;border: 1px solid #f39c12;}
+            .wishes .btn-default.active.focus {outline: none;}
         </style>
     </head>
     <body class="hold-transition skin-blue layout-top-nav">
@@ -25,21 +27,19 @@
                     <h4 style="margin: 0;">Add Patient</h4>
                 </div>
                 <div class="container-fluid" style="margin-top: 25px;">
-                    <div class="col-sm-12">
-                        <?php if ($this->session->flashdata('success') != '') { ?>
-                            <div class="alert alert-success alert-dismissible">
-                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                                <h4><i class="icon fa fa-check"></i> Success!</h4>
-                                <?= $this->session->flashdata('success'); ?>
-                            </div>
-                        <?php } if ($this->session->flashdata('error') != '') { ?>
-                            <div class="alert alert-danger alert-dismissible">
-                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                                <h4><i class="icon fa fa-ban"></i> Failed!</h4>
-                                <?= $this->session->flashdata('error'); ?>
-                            </div>
-                        <?php } ?>
-                    </div>
+                    <?php if ($this->session->flashdata('success') != '') { ?>
+                        <div class="alert alert-success alert-dismissible">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                            <h4><i class="icon fa fa-check"></i> Success!</h4>
+                            <?= $this->session->flashdata('success'); ?>
+                        </div>
+                    <?php } if ($this->session->flashdata('error') != '') { ?>
+                        <div class="alert alert-danger alert-dismissible">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                            <h4><i class="icon fa fa-ban"></i> Failed!</h4>
+                            <?= $this->session->flashdata('error'); ?>
+                        </div>
+                    <?php } ?>
                     <form role="form" action="<?= base_url('admin_login/addPatient'); ?>" enctype="multipart/form-data" method="post">
                         <div class="row">
                             <div class="col-sm-8">
@@ -212,6 +212,34 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                            <div class="col-sm-12 wishes">
+                                                <div class="col-md-4">
+                                                    <label>Send Birthday Wishes ?</label>
+                                                    <div class="form-group">
+                                                        <div class="btn-group input-group" data-toggle="buttons">
+                                                            <label class="btn btn-default active" style="font-weight:normal">
+                                                                <input type="radio" name="bdayWishes" id="bdayWishes" value="1" datatype="SYS_TYPE_NAME" checked="checked">Yes
+                                                            </label>
+                                                            <label class="btn btn-default" style="font-weight:normal">
+                                                                <input type="radio" name="bdayWishes" id="bdayWishes" value="0" datatype="SYS_TYPE_NAME">No
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <label>Send Billing Reminders ?</label>
+                                                    <div class="form-group">
+                                                        <div class="btn-group input-group" data-toggle="buttons">
+                                                            <label class="btn btn-default active" style="font-weight:normal">
+                                                                <input type="radio" name="billRem" id="billRem" value="1" datatype="SYS_TYPE_NAME" checked="checked">Yes
+                                                            </label>
+                                                            <label class="btn btn-default" style="font-weight:normal">
+                                                                <input type="radio" name="billRem" id="billRem" value="0" datatype="SYS_TYPE_NAME">No
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -253,7 +281,7 @@
                                             <button type="button" class="btn btn-box-tool" id="groups_plus"><i class="fa fa-plus"></i></button>
                                         </div>
                                     </div>
-                                    <div class="box-body" style="max-height: 260px; overflow-y: scroll;">
+                                    <div class="box-body" style="max-height: 340px; overflow-y: scroll;">
                                         <div class="col-md-12">
                                             <div class="grp_add_class">
                                                 <div class="form-group">

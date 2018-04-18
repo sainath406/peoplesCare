@@ -144,6 +144,8 @@ class Admin_login extends CI_Controller {
                 'locality' => $this->input->post('locality'),
                 'city' => $this->input->post('city'),
                 'pincode' => $this->input->post('pincode'),
+                'bdayWishes' => $this->input->post('bdayWishes'),
+                'billRem' => $this->input->post('billRem'),
                 'created' => $now,
                 'modified' => $now
             );

@@ -47,10 +47,14 @@
     $(document).ready(function () {
         $("#med_plus").click(function () {
             $(".med_add_class").slideToggle('medium');
+            $("#med_add").val('');
+            $(".error_med").hide();
         });
 
         $("#groups_plus").click(function () {
             $(".grp_add_class").slideToggle('medium');
+            $("#grp_add").val('');
+            $(".error_grp").hide();
         });
 
         $("#submit_med").click(function () {
@@ -72,6 +76,7 @@
                     success: function (msg) {
                         $("#submit_med").text('Add Item');
                         $("#submit_med").removeAttr('disabled');
+                        $("#med_add").val('');
                         $(".med_add_class").hide();
                         if (msg != '') {
                             $("#each_med").html(msg);
@@ -102,6 +107,7 @@
                     success: function (msg) {
                         $("#submit_grp").text('Add Item');
                         $("#submit_grp").removeAttr('disabled');
+                        $("#grp_add").val('');
                         $(".grp_add_class").hide();
                         if (msg != '') {
                             $("#each_grp").html(msg);
