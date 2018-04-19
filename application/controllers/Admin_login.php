@@ -186,6 +186,7 @@ class Admin_login extends CI_Controller {
         $data['doctors'] = $this->patient_model->getDoctors();
         $data['categories'] = $this->patient_model->getCategories();
         $data['procedures'] = $this->patient_model->getProcedures();
+        $data['clinics'] = $this->patient_model->getClinics();
         $this->load->library('form_validation');
         $this->form_validation->set_error_delimiters('<div class="error_frm">', '</div>');
         $this->form_validation->set_rules('patient_name', 'Name', 'trim|required');

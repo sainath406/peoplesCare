@@ -34,6 +34,10 @@ class Patient_model extends CI_Model {
         return $this->db->where('status', 1)->get('procedures')->result();
     }
 
+    public function getClinics() {
+        return $this->db->where('status', 1)->get('clinics')->result();
+    }
+
     function getPatients($search) {
         $name = $search['name'];
         $email = $search['email'];

@@ -6,6 +6,7 @@
         <link rel="stylesheet" href="<?= config_item('root_dir'); ?>assets/admin/components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
         <link rel="stylesheet" href="<?= config_item('root_dir'); ?>assets/admin/plugins/iCheck/all.css">
         <link rel="stylesheet" href="<?= config_item('root_dir'); ?>assets/jquery/jquery-ui.css">
+        <link rel="stylesheet" href="<?= config_item('root_dir'); ?>assets/admin/plugins/timepicker/bootstrap-timepicker.min.css">
         <style>
             .select2 {font-size: 12px;}
             hr {margin-bottom: 10px; margin-top: 10px;}
@@ -72,14 +73,29 @@
                                                     <label>Doctors</label>
                                                     <span class="star">*</span>
                                                     <select class="form-control select2" id="doctors" name="doctors" style="width: 100%;">
-                                                        <option value="" <?= set_select('doctors``', "", TRUE) ?>> -- Select Doctor -- </option>
+                                                        <option value="" <?= set_select('doctors', "", TRUE) ?>> -- Select Doctor -- </option>
                                                         <?php foreach ($doctors as $doctor) { ?>
-                                                            <option value="<?= $doctor->id; ?>" <?= set_select('doctors', $doctor->id) ?>><?= $doctor->doctor_name; ?></option>
+                                                            <option value="<?= $doctor->id; ?>" <?= set_select('doctors', $doctor->id) ?> <?= (($doctor->id == 2) ? 'selected' : ''); ?>><?= $doctor->doctor_name; ?></option>
                                                         <?php } ?>
                                                     </select>
                                                     <?= form_error('doctors'); ?>
                                                 </div>
                                             </div>
+                                            <div class="col-sm-3">
+                                                <div class="form-group">
+                                                    <label>Clinics</label>
+                                                    <span class="star">*</span>
+                                                    <select class="form-control select2" id="clinic" name="clinic" style="width: 100%;">
+                                                        <option value="" <?= set_select('clinic', "", TRUE) ?>> -- Select Clinic -- </option>
+                                                        <?php foreach ($clinics as $clinic) { ?>
+                                                            <option value="<?= $clinic->id; ?>" <?= set_select('clinic', $clinic->id) ?> <?= (($clinic->id == 1) ? 'selected' : ''); ?> ><?= $clinic->clinic_name; ?></option>
+                                                        <?php } ?>
+                                                    </select>
+                                                    <?= form_error('clinic'); ?>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
                                             <div class="col-sm-3">
                                                 <div class="form-group">
                                                     <label>Category</label>
@@ -93,8 +109,6 @@
                                                     <?= form_error('category'); ?>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="col-md-12">
                                             <div class="col-sm-3">
                                                 <div class="form-group">
                                                     <label>Scheduled On</label>
@@ -106,7 +120,16 @@
                                                     <?= form_error('schedule_date'); ?>
                                                 </div>
                                             </div>
-                                            <div class="col-md-9">
+                                            <div class="col-sm-3 bootstrap-timepicker">
+                                                <div class="form-group">
+                                                    <label>Time picker:</label>
+                                                    <div class="input-group">
+                                                        <input type="text" class="form-control timepicker">
+                                                        <div class="input-group-addon"><i class="fa fa-clock-o"></i></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
                                                 <div class="form-group">
                                                     <label>Planned Procedures</label>
                                                     <select class="form-control select2" name="procedures[]" multiple="multiple" data-placeholder="Select a Procedures" style="width: 100%;">
@@ -144,9 +167,13 @@
         <script src="<?= config_item('root_dir'); ?>assets/admin/components/select2/dist/js/select2.full.min.js"></script>
         <script src="<?= config_item('root_dir'); ?>assets/admin/plugins/iCheck/icheck.min.js"></script>
         <script src="<?= config_item('root_dir'); ?>assets/jquery/jquery-ui.min.js"></script>
+        <script src="<?= config_item('root_dir'); ?>assets/admin/plugins/timepicker/bootstrap-timepicker.min.js"></script>
         <script>
                                                         $(function () {
                                                             $('.select2').select2();
+                                                            $('.timepicker').timepicker({
+                                                                showInputs: false
+                                                            });
                                                             $('#datepicker').datepicker({
                                                                 autoclose: true,
                                                                 minDate: 'D',
