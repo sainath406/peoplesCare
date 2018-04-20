@@ -7,6 +7,26 @@
         <link rel="stylesheet" href="<?= config_item('root_dir'); ?>assets/admin/plugins/iCheck/all.css">
         <link rel="stylesheet" href="<?= config_item('root_dir'); ?>assets/jquery/jquery-ui.css">
         <link rel="stylesheet" href="<?= config_item('root_dir'); ?>assets/admin/plugins/timepicker/bootstrap-timepicker.min.css">
+        <script src="<?= config_item('root_dir'); ?>assets/admin/components/select2/dist/js/select2.full.min.js"></script>
+        <script>
+            $(function () {
+                $('.select2').select2();
+                $('.timepicker').timepicker({
+                    showInputs: false
+                });
+                $('#datepicker').datepicker({
+                    autoclose: true,
+                    minDate: 'D',
+                    showAnim: 'slideDown',
+                    changeMonth: true,
+                    changeYear: true,
+                    setDate: 'D',
+                    dateFormat: 'dd-mm-yy',
+                    todayHighlight: true
+                });
+                $('#datepicker').datepicker('setDate', 'today');
+            });
+        </script>
         <style>
             .select2 {font-size: 12px;}
             hr {margin-bottom: 10px; margin-top: 10px;}
@@ -17,6 +37,13 @@
             .ui-menu .ui-menu-item .ui-state-active{border:none !important;background:#efefef; border-bottom: 1px solid #ccc !important; border-top: 1px solid #ccc !important;}
             .ui-menu .ui-menu-item:hover {border:none;}
             #ui-id-1 { max-height: 150px; overflow-y: scroll; overflow-x: hidden; }
+            input[type=number]::-webkit-inner-spin-button, 
+            input[type=number]::-webkit-outer-spin-button { 
+                -webkit-appearance: none;
+                -moz-appearance: none;
+                appearance: none;
+                margin: 0; 
+            }
         </style>
     </head>
     <body class="hold-transition skin-blue layout-top-nav">
@@ -122,14 +149,29 @@
                                             </div>
                                             <div class="col-sm-3 bootstrap-timepicker">
                                                 <div class="form-group">
-                                                    <label>Time picker:</label>
+                                                    <label>Time</label>
+                                                    <span class="star">*</span>
                                                     <div class="input-group">
-                                                        <input type="text" class="form-control timepicker">
+                                                        <input type="text" class="form-control timepicker" name="time" id="time" autocomplete="off" value="<?= set_value('time') ?>" placeholder="Select Time">
                                                         <div class="input-group-addon"><i class="fa fa-clock-o"></i></div>
                                                     </div>
+                                                    <?= form_error('time'); ?>
                                                 </div>
                                             </div>
-                                            <div class="col-md-3">
+                                            <div class="col-sm-3">
+                                                <div class="form-group">
+                                                    <label>Duration</label>
+                                                    <span class="star">*</span>
+                                                    <div class="input-group">
+                                                        <input type="text" class="form-control" name="duration" id="duration" autocomplete="off" value="<?= ((set_value('duration')) ? set_value('duration') : 30); ?>" placeholder="Enter Duration" onkeypress="return isNumberPress(event)">
+                                                        <div class="input-group-addon">Minutes</div>
+                                                    </div>
+                                                    <?= form_error('duration'); ?>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="col-md-12">
                                                 <div class="form-group">
                                                     <label>Planned Procedures</label>
                                                     <select class="form-control select2" name="procedures[]" multiple="multiple" data-placeholder="Select a Procedures" style="width: 100%;">
@@ -140,8 +182,6 @@
                                                     <?= form_error('procedures[]'); ?>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="col-md-12">
                                             <div class="col-md-12">
                                                 <div class="form-group">
                                                     <label>Notes</label>
@@ -164,52 +204,32 @@
         </div>
         <?php $this->load->view('common/footer_admin'); ?>
         <script src="<?= config_item('root_dir'); ?>assets/admin/components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
-        <script src="<?= config_item('root_dir'); ?>assets/admin/components/select2/dist/js/select2.full.min.js"></script>
         <script src="<?= config_item('root_dir'); ?>assets/admin/plugins/iCheck/icheck.min.js"></script>
         <script src="<?= config_item('root_dir'); ?>assets/jquery/jquery-ui.min.js"></script>
         <script src="<?= config_item('root_dir'); ?>assets/admin/plugins/timepicker/bootstrap-timepicker.min.js"></script>
-        <script>
-                                                        $(function () {
-                                                            $('.select2').select2();
-                                                            $('.timepicker').timepicker({
-                                                                showInputs: false
-                                                            });
-                                                            $('#datepicker').datepicker({
-                                                                autoclose: true,
-                                                                minDate: 'D',
-                                                                showAnim: 'slideDown',
-                                                                changeMonth: true,
-                                                                changeYear: true,
-                                                                setDate: 'D',
-                                                                dateFormat: 'dd-mm-yy',
-                                                                todayHighlight: true
-                                                            });
-                                                            $('#datepicker').datepicker('setDate', 'today');
-                                                        });
-        </script>
         <script type="text/javascript">
-            function isNumberPress(evt) {
-                evt = (evt) ? evt : window.event;
-                var charCode = (evt.which) ? evt.which : evt.keyCode;
-                if (charCode > 31 && (charCode < 48 || charCode > 57)) {
-                    return false;
-                }
-                return true;
-            }
+                                                            function isNumberPress(evt) {
+                                                                evt = (evt) ? evt : window.event;
+                                                                var charCode = (evt.which) ? evt.which : evt.keyCode;
+                                                                if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+                                                                    return false;
+                                                                }
+                                                                return true;
+                                                            }
 
-            $(document).ready(function () {
-                $("input, textarea").on("keypress", function (e) {
-                    if (e.which === 32 && !this.value.length)
-                        e.preventDefault();
-                });
-            });
+                                                            $(document).ready(function () {
+                                                                $("input, textarea").on("keypress", function (e) {
+                                                                    if (e.which === 32 && !this.value.length)
+                                                                        e.preventDefault();
+                                                                });
+                                                            });
 
-            function allowalphaspace(event) {
-                var inputValue = event.which;
-                if ((inputValue > 47 && inputValue < 58) && (inputValue != 32)) {
-                    event.preventDefault();
-                }
-            }
+                                                            function allowalphaspace(event) {
+                                                                var inputValue = event.which;
+                                                                if ((inputValue > 47 && inputValue < 58) && (inputValue != 32)) {
+                                                                    event.preventDefault();
+                                                                }
+                                                            }
         </script>
         <script>
             $(document).ready(function () {

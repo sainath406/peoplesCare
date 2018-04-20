@@ -11,3 +11,5 @@
 <link rel="stylesheet" href="<?= config_item('root_dir'); ?>assets/admin/dist/css/skins/_all-skins.min.css">
 <link href="https://fonts.googleapis.com/css?family=Work+Sans|Raleway|Montserrat|Cinzel|Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic" rel="stylesheet">
 <link rel="stylesheet" href="<?= config_item('root_dir'); ?>assets/admin/css/common.css">
+<script src="<?= config_item('root_dir'); ?>assets/admin/components/jquery/dist/jquery.min.js"></script>
+<script src="<?= config_item('root_dir'); ?>assets/admin/components/bootstrap/dist/js/bootstrap.min.js"></script>

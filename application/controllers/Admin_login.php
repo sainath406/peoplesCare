@@ -198,6 +198,9 @@ class Admin_login extends CI_Controller {
         }
         $this->form_validation->set_rules('procedures[]', 'Procedures');
         $this->form_validation->set_rules('doctors', 'Doctor', 'trim|required');
+        $this->form_validation->set_rules('clinic', 'Clinic', 'trim|required');
+        $this->form_validation->set_rules('time', 'Time', 'trim|required');
+        $this->form_validation->set_rules('duration', 'Doctor', 'trim|required');
         $this->form_validation->set_rules('category', 'Category', 'trim|required');
         $this->form_validation->set_rules('schedule_date', 'schedule_date', 'trim|required');
         $this->form_validation->set_rules('description', 'Notes');
@@ -228,8 +231,11 @@ class Admin_login extends CI_Controller {
                 'patient_id' => $insert_id,
                 'procedures' => $procedures,
                 'doctor_id' => $this->input->post('doctors'),
+                'clinic_id' => $this->input->post('clinic'),
                 'category_id' => $this->input->post('category'),
                 'schedule_date' => $schedule_date,
+                'time' => $this->input->post('time'),
+                'duration' => $this->input->post('duration'),
                 'description' => $this->input->post('description'),
                 'created' => $now,
                 'modified' => $now

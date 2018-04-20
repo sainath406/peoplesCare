@@ -90,8 +90,13 @@
                                                     <td><?= $member->time; ?></td>
                                                     <td class="text-center"><?= date('d-m-Y', strtotime($member->created)); ?></td>
                                                     <td class="icon_crud text-center">
-                                                        <a href="<?= base_url(); ?>" class="btn btn-primary" title="View Patient"><i class="fa fa-eye"></i></a>
-                                                        <a href="#" class="btn btn-danger" title="Delete Patient"><i class="fa fa-trash"></i></a>
+                                                        <?php if ($member->is_patient) { ?>
+                                                            <a class="btn btn-success" title="Patient Status"><i class="fa fa-check"></i></a>
+                                                        <?php } else { ?>
+                                                            <a class="btn btn-danger" title="Patient Status"><i class="fa fa-close"></i></a>
+                                                        <?php } ?>
+                                                        <a href="<?= base_url() . "admin_login/viewContactMember/" . $member->id; ?>" class="btn btn-primary" title="View Contact"><i class="fa fa-eye"></i></a>
+                                                        <a href="#" class="btn btn-danger" title="Delete Contact"><i class="fa fa-trash"></i></a>
                                                     </td>
                                                 </tr>
                                                 <?php
